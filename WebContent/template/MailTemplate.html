@@ -1,0 +1,139 @@
+<head>
+<style>
+.table_cart {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.col-xs-12 {
+    width: 100%;
+}
+.container {
+    width: 800px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #FBFBFB;
+    height: 100%;
+}
+.table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.cart-area {
+    height: 100%;
+}
+.cart_list tbody td {
+    padding: 5px 25px;
+}
+.table-bordered>tbody>tr>td {
+    border: 1px solid #ddd;
+    text-transform: none !important;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+table td{
+	padding: 5px;
+}
+table.table_cart.table-bordered td{
+	padding: 14px;
+}
+.cart_list thead th {
+    color: #303030;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 15px 0;
+    text-align: center;
+    text-transform: uppercase;
+    background: #FFFFFF;
+}
+.total h2, .table-bordered>tbody>tr>td{
+    font-size: 14px;
+    color: #303030;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.total {
+    float: right;
+    margin-left: 0;
+    padding-bottom: 31px;
+    text-align: right;
+}
+.total h2 {
+    margin-bottom: 15px;
+}
+.priceAmt{
+	padding-left: 35px;
+	text-transform: initial;
+}
+</style>
+</head>
+ <div class="cart-area">
+     <div class="container"> 
+	     <div class="row" style="float: left;">
+		     <div class="col-lg-7 col-md-8 col-sm-12">      
+		         <div class="total">
+		         	<table>
+		         		<tr>
+		         			<th></th>
+		         			<th></th>
+		         		</tr>
+		         		<tr>
+		         			<td>SUBTOTAL :</td>
+		         			<td>Rs. #SUBTOTAL</td>
+		         		</tr>
+		         		<tr>
+		         			<td>GRANDTOTAL :</td>
+		         			<td>Rs. #GRANDTOTAL</td>
+		         		</tr>
+		         	</table>
+		         </div>
+		     </div>    
+		 </div>  
+	     <div class="row">
+		     <div class="col-lg-7 col-md-8 col-sm-12">      
+		         <div class="total text-right">
+		         	<table>
+		         		<tr>
+		         			<th></th>
+		         		</tr>
+		         		<tr>
+		         			<td>#NAME</td>
+		         		</tr>
+		         		<tr>
+		         			<td>#EMAIL</td>
+		         		</tr>
+		         		<tr>
+		         			<td>#MOBILE</td>
+		         		</tr>
+		         		<tr>
+		         			<td>ORDER ID : #ORDERID</td>
+		         		</tr>
+		         	</table>
+		         </div>
+		     </div>    
+		 </div>       
+         <div class="row">
+             <div class="col-xs-12">   
+                 <div class="cart_list table-responsive">
+                     <table class="table_cart table-bordered">
+                         <thead>
+                             <tr>
+                                 <th class="id">#</th>
+                                 <th class="product">Product Id</th>
+                                 <th class="description">Product Name</th>
+                                 <th class="quantity">Quantity</th>
+                                 <th class="value">Price</th>
+                             </tr>
+                         </thead>
+                         #TBODY
+                     </table>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>

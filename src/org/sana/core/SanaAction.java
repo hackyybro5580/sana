@@ -28,6 +28,15 @@ public class SanaAction{
 		 try {
 			 request  = ServletActionContext.getRequest();
 			 response = ServletActionContext.getResponse();
+			 Cookie cookie = new Cookie("isMobile", "false");
+				
+			 if(request.getHeader("User-Agent").contains("Mobi")) {
+				 cookie = new Cookie("isMobile", "true");
+				 request.setAttribute("isFirstVisit", false);
+				 response.addCookie(cookie);
+			 } else {
+				 response.addCookie(cookie);
+			 }
 			 
 			 if(requestObj==null) {
 			     requestObj = new JSONObject();
@@ -90,7 +99,7 @@ public class SanaAction{
 //			 }
 			 boolean isFirstVisit = isFirstVisit();
 			 if(isFirstVisit) {
-				 Cookie cookie = new Cookie("isFirstVisit", "false");
+				 cookie = new Cookie("isFirstVisit", "false");
 				 response.addCookie(cookie);
 			 }
 			 request.setAttribute("isFirstVisit", isFirstVisit);
@@ -98,6 +107,7 @@ public class SanaAction{
 		 }catch(Exception e) {
 			 result = "error";
 		 }
+		 result = Boolean.valueOf(isMobile()) ? "mob_"+result : result;
 		 return result;
 	}
 	
@@ -208,6 +218,18 @@ public class SanaAction{
 			 for(Cookie cookie : cookies) {
 				 if(cookie.getName().equals("cart")) {
 					 return cUtil.decrypt(cookie.getValue());
+				 }
+			 }
+		 }
+		 return "";
+	}
+	
+	public String isMobile() {
+		Cookie[] cookies = request.getCookies();
+		 if(cookies!=null) {
+			 for(Cookie cookie : cookies) {
+				 if(cookie.getName().equals("isMobile")) {
+					 return cookie.getValue();
 				 }
 			 }
 		 }
@@ -356,9 +378,9 @@ public class SanaAction{
 				
 				if(price!=null) {
 					if(query.contains("where")) {
-						query = "where "+DefaultValues.priceMap.get(price);
+						query += "and "+DefaultValues.priceMap.get(price);
 					}else {
-						query = "and "+DefaultValues.priceMap.get(price);
+						query = "where and "+DefaultValues.priceMap.get(price);
 					}
 				}
 				
@@ -378,7 +400,7 @@ public class SanaAction{
 					if(query.contains("where")) {
 						query +=" and type='"+type+"'";
 					}else {
-						query +=" where type='"+type+"'";
+						query =" where type='"+type+"'";
 					}
 				}
 				
@@ -396,7 +418,7 @@ public class SanaAction{
 					if(query.contains("where")) {
 						query +=" and orientation='"+orientation+"'";
 					}else {
-						query +=" where orientation='"+orientation+"'";
+						query =" where orientation='"+orientation+"'";
 					}
 				}
 				
@@ -415,9 +437,9 @@ public class SanaAction{
 				
 				if(color!=null) {
 					if(query.contains("where")) {
-						query +=" and color='"+color+"'";
+						query += " and color='"+color+"'";
 					}else {
-						query +=" where color='"+color+"'";
+						query = " where color='"+color+"'";
 					}
 				}
 				

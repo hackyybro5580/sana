@@ -134,13 +134,9 @@ td{
 td:last-child{
 	padding: 0 0 2% 0;
 }
-.ThreeInARow{
-	width: 383px;
-    height: 383px;
-}
-.FourInARow{
-	width: 282px;
-    height: 282px;
+.TwoInARow{
+	width: 719px;
+    height: 719px;
 }
 a img{
 	z-index: 51;
@@ -173,6 +169,81 @@ td div{
 	position: fixed;
     top: 0;
     z-index: 999;
+}
+.nivo_text{
+	margin-top: 700px !important;
+	z-index: 999;
+}
+.preview-2 .nivoSlider{
+	height: 1300px !important;
+}
+.nivo-caption{
+	background: white !important;
+}
+.nivo-main-image{
+	z-index: 100;
+}
+.title{
+	color: black !important;
+}
+h2.title{
+	font-size: 100px !important;
+	padding-bottom: 50px !important;
+}
+h3.ti7{
+	font-size: 50px !important;
+	padding-bottom: 90px !important;
+}
+.nivo-prevNav {
+	right: 12% !important;
+}
+.nivo-prevNav , .nivo-nextNav{
+	color: #DDCFC1 !important;
+	font-size: 30px !important;
+}
+.nivo-directionNav{
+	display: none !important;
+}
+.slider-button {
+	font-size: 50px !important;
+	text-transform: capitalize;
+    border-bottom: none;
+    color: #fff;
+    padding: 60px 90px;
+    display: block;
+    background: #DDCFC1;
+    letter-spacing: 4px;
+    font-weight: 500;
+    color: black;
+}
+.section-title h2{
+	font-size: 90px;
+}
+.section-heading h3{
+	font-size: 60px;
+	padding: 10px 80px 12px 80px !important;
+}
+.section-heading h3:after{
+	border-right: 28px solid #ffffff;
+}
+.section-heading h3:before{
+	border-left: 28px solid #ffffff;
+}
+.section-heading h3:after, .section-heading h3:before{
+	border-top: 44px solid transparent;
+    border-bottom: 44px solid transparent;
+}
+.center-align {
+    padding-top: 5%;
+}
+.section-heading:after{
+	margin-top: 36px;
+    border-top: 16px;
+    border-top-color: #e8d5c5;
+    border-top-style: solid;
+}
+.showCaseItems{
+	padding: 2% !important;
 }
 </style>
 <%
@@ -242,24 +313,16 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 					<div class="center-align">
 						<table style="width: 100%;">
 							<tr>
-								<%for(int i=0;i<3;i++){JSONObject obj = showCaseHindu.getJSONObject(i);%>
+								<%for(int i=0;i<2;i++){JSONObject obj = showCaseHindu.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
-								<%for(int i=3;i<6;i++){JSONObject obj = showCaseHindu.getJSONObject(i);%>
+								<%for(int i=2;i<4;i++){JSONObject obj = showCaseHindu.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
@@ -278,24 +341,16 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 					<div class="center-align">
 						<table style="width: 100%;">
 							<tr>
-								<%for(int i=0;i<3;i++){JSONObject obj = showCaseMuslim.getJSONObject(i);%>
+								<%for(int i=0;i<2;i++){JSONObject obj = showCaseMuslim.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
-								<%for(int i=3;i<6;i++){JSONObject obj = showCaseMuslim.getJSONObject(i);%>
+								<%for(int i=2;i<4;i++){JSONObject obj = showCaseMuslim.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
@@ -314,24 +369,16 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 					<div class="center-align">
 						<table style="width: 100%;">
 							<tr>
-								<%for(int i=0;i<3;i++){JSONObject obj = showCaseChristian.getJSONObject(i);%>
+								<%for(int i=0;i<2;i++){JSONObject obj = showCaseChristian.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
-								<%for(int i=3;i<6;i++){JSONObject obj = showCaseChristian.getJSONObject(i);%>
+								<%for(int i=2;i<4;i++){JSONObject obj = showCaseChristian.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="ThreeInARow"></a>
-									<div class="bottom50 showOnHover">
-										<div href="#"><%=obj.get("name")%></div>
-										<div>Rs. <%=obj.get("price")%></div>
-									</div>
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
@@ -355,24 +402,16 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 		             <div class="center-align">
 						<table style="width: 100%;">
 							<tr>
-								<%for(int i=0;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
+								<%for(int i=0;i<2;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
-								<%for(int i=4;i<8;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
+								<%for(int i=2;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
@@ -394,24 +433,16 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 		             <div class="center-align">
 						<table style="width: 100%;">
 							<tr>
-								<%for(int i=0;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
+								<%for(int i=0;i<2;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
-								<%for(int i=4;i<8;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
+								<%for(int i=2;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
+									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
@@ -427,7 +458,7 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 		<div class="col-xs-12">
 			<div class="section-tab">
 				<div class="section-tab-menu text-left section-heading">
-					<h3>Instagram Feed</h3>
+					<h3>Blogs</h3>
 				</div> 
 	             <div class="center-align">
                  <table style="width: 100%;">

@@ -8,13 +8,13 @@
             <result name="success" type="tiles">homepage</result>
             <result name="mob_success" type="tiles">mob_homepage</result>
             <result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="addToCart" class="org.sana.core.SanaAction" method="addToCart">
         	<result name="success">/jsp/header.jsp</result>
-        	<result name="success">/jsp/mob_header.jsp</result>
+        	<result name="mob_success">/jsp/mob_header.jsp</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="removeFromCart" class="org.sana.core.SanaAction" method="removeFromCart">
         	<result name="success">/jsp/header.jsp</result>
@@ -22,38 +22,38 @@
         	<result name="showCartPage" type="tiles">CartPage</result>
         	<result name="mob_showCartPage" type="tiles">mob_CartPage</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="cart" class="org.sana.core.SanaAction" method="cart">
         	<result name="success" type="tiles">CartPage</result>
         	<result name="mob_success" type="tiles">mob_CartPage</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="proceedToEnquire" class="org.sana.core.SanaAction" method="proceedToEnquire"/>
         <action name="aboutus">
         	<result type="tiles">AboutUs</result>
         	<result type="tiles">mob_AboutUs</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="contactus">
         	<result type="tiles">ContactUs</result>
         	<result type="tiles">mob_ContactUs</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="shop" class="org.sana.core.SanaAction" method="shop">
         	<result name="success" type="tiles">Shop</result>
-        	<result name="success" type="tiles">mob_Shop</result>
+        	<result name="mob_success" type="tiles">mob_Shop</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         <action name="productDescription" class="org.sana.core.SanaAction" method="productDescription">
         	<result name="success" type="tiles">ProductDescription</result>
-        	<result name="success" type="tiles">mob_ProductDescription</result>
+        	<result name="mob_success" type="tiles">mob_ProductDescription</result>
         	<result name="error">error</result>
-        	<result name="error">mob_error</result>
+        	<result name="mob_error">mob_error</result>
         </action>
         
         <action name="*">

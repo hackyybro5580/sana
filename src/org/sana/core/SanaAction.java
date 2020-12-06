@@ -414,7 +414,7 @@ public class SanaAction{
 				}
 				
 				if(color!=null) {
-					if(color.contains("where")) {
+					if(query.contains("where")) {
 						query +=" and color='"+color+"'";
 					}else {
 						query +=" where color='"+color+"'";

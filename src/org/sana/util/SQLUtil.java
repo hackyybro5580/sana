@@ -19,15 +19,21 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try{  
 			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana?characterEncoding=utf8","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			result = Boolean.TRUE;
 		}catch(Exception e1){
 			String message = e1.getMessage();
 			if(message!=null && message.startsWith("Unknown database")) {
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
+				try {
+				con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306?characterEncoding=utf8","root","sanacards#2020#");
+				//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
 				Statement smt = con.createStatement();
 				smt.executeUpdate("create database sana");
+				}catch(Exception e) {
+					int a = 1;
+				}
 				result = Boolean.TRUE;
 			}
 		}finally {
@@ -43,9 +49,10 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try{  
 			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
-			smt.executeUpdate("create table products(ID varchar(10), NAME varchar(50), PRICE FLOAT, IMG_PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25))");
+			smt.executeUpdate("create table products(ID varchar(50), NAME varchar(50), PRICE FLOAT, IMG_PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25))");
 			
 			String insertquery = "insert into products values(";
 			String[] productsArray = DefaultValues.productArray;
@@ -63,7 +70,8 @@ public class SQLUtil {
 		catch(SQLException e) {
 			String message = e.getMessage();
 			if(message!=null && message.endsWith("already exists")) {
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+				con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+				//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 				Statement smt = con.createStatement();
 				smt.executeUpdate("drop table products");
 				result = Boolean.FALSE;
@@ -85,7 +93,8 @@ public class SQLUtil {
 		JSONArray responseArray = new JSONArray();
 		try{  
 			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			JSONObject obj = null;
@@ -122,7 +131,8 @@ public class SQLUtil {
 		int rowsCount = 0;
 		try{  
 			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			rs.next();

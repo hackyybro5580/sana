@@ -7,14 +7,14 @@ if(request.getAttribute("cart")!=null){
 	cart = (JSONArray)request.getAttribute("cart");
 }
 %>
-<div id="cartPage">
+<div id="cartPage" style="min-height: 1200px;">
  <!-- breadcrumb start -->
  <div class="breadcrumb-area">
      <div class="container">
          <div class="row">
              <div class="col-md-12 text-left">
                  <ul class="breadcrumb">
-                     <li><a href="index.html">Home</a><span> - </span></li>
+                     <li><a href="/home">Home</a><span> - </span></li>
                      <li class="active">shopping cart</li>
                  </ul>
              </div>

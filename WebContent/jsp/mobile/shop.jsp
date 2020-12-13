@@ -5,6 +5,58 @@ JSONArray products = (JSONArray)request.getAttribute("products");
 int totProducts = (int)request.getAttribute("totProducts");
 %>
 <style>
+.section-title li {
+	padding: 30px;
+}
+.hideLayer {
+	position: fixed;
+	top: 0;
+	z-index: 998;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.shopArea *{
+	font-size: 50px !important;
+}
+.paginationjs-pages ul li{
+	padding: 10px;
+}
+.single-left-widget {
+	border: none;
+}
+.single-product-item {
+	max-width: 400px;
+	max-height: 500px;
+	width: 400px;
+    height: 500px;
+}
+.criteriaClass{
+	position: fixed;
+    top: 0;
+    z-index: 999;
+    background: white;
+    padding-left: 0px;
+    left: 0;
+    width: 800px;
+    height: 100%;
+	bottom:0;
+	overflow-y:hidden;
+    overflow-x:scroll;
+}
+.criteriaSlider{
+	position: fixed;
+	z-index: 998;
+	left : 0;
+	border: 1px solid;
+    border-left: 0;
+}
+.single-left-widget .section-title ul li a, .single-left-widget .section-title h4{
+	font-size: 50px;
+}
+.single-left-widget .section-title ul li {
+	padding: 25px;
+}
 .showSubMenu{
 	display: contents;
 }
@@ -97,120 +149,130 @@ body {
 //Pagination Style Ends
 </style>
  <!-- latest blog start -->
+ <div class="shopArea">
  <div class="breadcrumb-area">
      <div class="container">
          <div class="row">
              <div class="col-md-12 text-left">
                  <ul class="breadcrumb">
-                     <li><a href="index.html">Home</a><span> - </span></li>
+                     <li><a href="/home">Home</a><span> - </span></li>
                      <li class="active">Shop</li>
                  </ul>
              </div>
          </div>
      </div>
- </div>        
- <div class="shop-grid-leftsidebar-area">
+ </div> 
+ 
+ 
+ 
+ 
+
+<a href="javascript:showCriteriaSlider();" class="criteriaSlider">
+	<i class="fa fa-angle-right" style="padding: 20px;font-size: 100px !important;"></i>
+</a>        
+<div class="hideLayer">
+    <div class="shop-left-sidebar criteriaClass" style="display: none;">
+        <div class="single-left-widget">
+            <div class="section-title">
+                <h4>Category</h4>
+                <ul>
+                    <li><a class="show-submenu" onclick="showDropMenu(this);" id="wedding">Wedding<i class="fa fa-angle-down"></i></a>
+                        <ul class="submenu">
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#hinduInvitation" id="hinduInvitation">Hindu Invitations</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#muslimInvitation" id="muslimInvitation">Muslim Invitations</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#christianInvitation" id="christianInvitation">Christian Invitations</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="show-submenu" onclick="showDropMenu(this);" id="occassional">Occasional<i class="fa fa-angle-down"></i></a>
+                        <ul class="submenu">
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#engagement" id="engagement">Engagement</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#reception" id="reception">Reception</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#houseWarming" id="houseWarming">House Warming</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#inauguration" id="inauguration">Inauguration</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#earPiercing" id="earPiercing">Ear Piercing ceremony</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#namingCeremony" id="namingCeremony">Naming ceremony</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#babyShower" id="babyShower">Baby shower</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="show-submenu" onclick="showDropMenu(this);" id="addons">Add On's<i class="fa fa-angle-down"></i></a>
+                        <ul class="submenu">
+                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#thankyouCards" id="thankyouCards">Thank You Cards</a></li>
+                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#thamboolamBags" id="thamboolamBags">Thamboolam Bags</a></li>
+                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#friendsInvitation" id="friendsInvitation">Friends Invitations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="single-left-widget">
+            <div class="section-title">
+                <h4>Type</h4>
+	                <ul class="submenu" style="display: contents;">
+	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
+	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
+	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
+	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
+	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
+                   	</ul>
+                   </div>
+               </div>
+               
+				<div class="single-left-widget">
+                   <div class="section-title">
+                       <h4>Orientation</h4>
+                       <ul class="submenu" style="display: contents;">
+                		<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#vertical">Vertical Cards</a></li>
+						<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#horizontal">Horizontal Cards</a></li>
+						<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#square">Square Cards</a></li>
+                       </ul>
+                   </div>
+               </div>
+               
+				<div class="single-left-widget">
+                   <div class="section-title">
+                       <h4>Price (<i class="fa fa-inr" aria-hidden="true"></i>)</h4>
+                       <ul class="submenu" style="display: contents;">
+	                	<li><a onclick="setPriceSortAndFetch(this);" value="1">&lt; 10</a></li>
+						<li><a onclick="setPriceSortAndFetch(this);" value="2">10-20</a></li>
+						<li><a onclick="setPriceSortAndFetch(this);" value="3">20-30</a></li>
+						<li><a onclick="setPriceSortAndFetch(this);" value="4">&gt; 50</a></li>
+                		</ul>
+		            </div>
+		        </div>
+        
+		        <div class="single-left-widget" style="padding:37px 25px 22px;display: none;">
+		           <div class="section-title">
+		               <h4>filter by color</h4>
+		               <ul class="color-widget">
+		                   <li class="active"><span class="black"></span><a onclick="setSubCategoryAndFetch(this);" value="color#black">black</a></li>
+		                   <li><span class="white"></span><a onclick="setSubCategoryAndFetch(this);" value="color#white">white</a></li>
+		                   <li><span class="red"></span><a onclick="setSubCategoryAndFetch(this);" value="color#red">red</a></li>
+		                   <li><span class="blue"></span><a onclick="setSubCategoryAndFetch(this);" value="color#blue">blue</a></li>
+		                   <li><span class="pink"></span><a onclick="setSubCategoryAndFetch(this);" value="color#pink">pink</a></li>
+		                   <li><span class="yellow"></span><a onclick="setSubCategoryAndFetch(this);" value="color#yellow">yellow</a></li>
+		               </ul>
+		           </div>
+		       </div>
+    </div>
+</div> 
+             
+ <div class="shop-grid-leftsidebar-area" style="height: 100%;">
      <div class="container">   
          <div class="row">
-             <div class="col-md-3 col-sm-12 col-xs-12">
-                 <div class="shop-left-sidebar">
-                     <div class="single-left-widget">
-                         <div class="section-title">
-                             <h4>Category</h4>
-                             <ul>
-                                 <li><a class="show-submenu" onclick="showDropMenu(this);" id="wedding">Wedding<i class="fa fa-angle-down"></i></a>
-                                     <ul class="submenu">
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#hinduInvitation" id="hinduInvitation">Hindu Invitations</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#muslimInvitation" id="muslimInvitation">Muslim Invitations</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#christianInvitation" id="christianInvitation">Christian Invitations</a></li>
-                                     </ul>
-                                 </li>
-                                 <li><a class="show-submenu" onclick="showDropMenu(this);" id="occassional">Occasional<i class="fa fa-angle-down"></i></a>
-                                     <ul class="submenu">
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#engagement" id="engagement">Engagement</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#reception" id="reception">Reception</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#houseWarming" id="houseWarming">House Warming</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#inauguration" id="inauguration">Inauguration</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#earPiercing" id="earPiercing">Ear Piercing ceremony</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#namingCeremony" id="namingCeremony">Naming ceremony</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#babyShower" id="babyShower">Baby shower</a></li>
-                                     </ul>
-                                 </li>
-                                 <li><a class="show-submenu" onclick="showDropMenu(this);" id="addons">Add On's<i class="fa fa-angle-down"></i></a>
-                                     <ul class="submenu">
-	                                     <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#thankyouCards" id="thankyouCards">Thank You Cards</a></li>
-	                                     <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#thamboolamBags" id="thamboolamBags">Thamboolam Bags</a></li>
-	                                     <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#friendsInvitation" id="friendsInvitation">Friends Invitations</a></li>
-                                     </ul>
-                                 </li>
-                             </ul>
-                         </div>
-                     </div>
-                     
-                     <div class="single-left-widget">
-                         <div class="section-title">
-                             <h4>Type</h4>
-                             <ul class="submenu" style="display: contents;">
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
-                             </ul>
-                         </div>
-                     </div>
-                     
-					 <div class="single-left-widget">
-                         <div class="section-title">
-                             <h4>Orientation</h4>
-                             <ul class="submenu" style="display: contents;">
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#vertical">Vertical Cards</a></li>
-								<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#horizontal">Horizontal Cards</a></li>
-								<li><a onclick="setSubCategoryAndFetch(this);" value="orientation#square">Square Cards</a></li>
-                             </ul>
-                         </div>
-                     </div>
-                     
-					 <div class="single-left-widget">
-                         <div class="section-title">
-                             <h4>Price (<i class="fa fa-inr" aria-hidden="true"></i>)</h4>
-                             <ul class="submenu" style="display: contents;">
-                             	<li><a onclick="setPriceSortAndFetch(this);" value="1">&lt; 10</a></li>
-								<li><a onclick="setPriceSortAndFetch(this);" value="2">10-20</a></li>
-								<li><a onclick="setPriceSortAndFetch(this);" value="3">20-30</a></li>
-								<li><a onclick="setPriceSortAndFetch(this);" value="4">&gt; 50</a></li>
-                             </ul>
-                         </div>
-                     </div>
-                     
-                     <div class="single-left-widget" style="padding:37px 25px 22px;">
-                        <div class="section-title">
-                            <h4>filter by color</h4>
-                            <ul class="color-widget">
-                                <li class="active"><span class="black"></span><a onclick="setSubCategoryAndFetch(this);" value="color#black">black</a></li>
-                                <li><span class="white"></span><a onclick="setSubCategoryAndFetch(this);" value="color#white">white</a></li>
-                                <li><span class="red"></span><a onclick="setSubCategoryAndFetch(this);" value="color#red">red</a></li>
-                                <li><span class="blue"></span><a onclick="setSubCategoryAndFetch(this);" value="color#blue">blue</a></li>
-                                <li><span class="pink"></span><a onclick="setSubCategoryAndFetch(this);" value="color#pink">pink</a></li>
-                                <li><span class="yellow"></span><a onclick="setSubCategoryAndFetch(this);" value="color#yellow">yellow</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                 </div>
-             </div>   
-             <div class="col-md-9 col-sm-12 col-xs-12">   
-                 <div class="shop-item-filter">
+             <div>   
+                 <div class="shop-item-filter" style="display:none;">
                      <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
                          <div class="shop-tab clearfix">
                              <!-- Nav tabs -->
-                             <ul role="tablist">
+                             <ul role="tablist" style="display: none;">
                                  <li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="grid" class="grid-view" href="#grid"><i class="fa fa-th"></i></a></li>
 <!--                                  <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="list" class="list-view" href="#list"><i class="fa fa-th-list"></i></a></li> -->
                              </ul>
                          </div>
                      </div>    
                      <div class="col-lg-4 col-md-5 col-sm-4 hidden-xs">      
-                         <div class="filter-by text-center">
+                         <div class="filter-by text-center" style="width: 500px;">
                              <h4>Sort by: </h4>
                              <form action="#">
                                  <div class="select-filter">
@@ -224,7 +286,6 @@ body {
                      </div> 
                      <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
                          <div class="filter-by right">
-                             <h4>Show: </h4>
                              <form action="#">
                                  <div class="select-filter">
                                      <select id="limit" onchange="pagination();">
@@ -252,45 +313,49 @@ body {
                              </div>
                          	<%}else{%>
 	                         <div class="row">
-	                         	<%for(int i=0;i<products.length();i++){JSONObject obj = products.getJSONObject(i);%>
-	                             <div class="col-md-4 col-sm-4 col-xs-12" style="width:260px;">
-	                                 <div class="single-product">
-	                                     <div class="single-product-item">
-	                                         <div class="single-product-img clearfix hover-effect">
-	                                             <a onclick="openProductDetails('<%=obj.get("id")%>');">
-	                                                 <img class="primary-image" src="<%=obj.get("path")%>" alt="">
-	                                             </a>
-	                                         </div>
-	                                         <div class="single-product-info clearfix"> 
-	                                             <div class="pro-price">
-	                                                 <span class="new-price">Rs. <%=obj.get("price")%></span>
-	                                             </div>
-	                                             <div class="new-sale">
-	                                                 <span>new</span>
-	                                             </div>  
-	                                         </div>
-	                                         <div class="product-content text-center">
-	                                             <h3><%=obj.get("name")%></h3>
-	                                             <h4><a onclick="openProductDetails('<%=obj.get("id")%>');"></a></h4>
-	                                         </div>
-	                                         <div class="product-action">      
-	                                             <ul>
-	                                                 <li class="add-bag"><a data-toggle="tooltip" title="Shopping Cart" onclick="addToCart('<%=obj.get("id")%>','<%=obj.get("name")%>');">Add to Bag</a></li>
-	                                                 </ul>
-	                                         </div>
-	                                     </div>
-	                                 </div>
-	                             </div>
-	                            <%}}%>
+	                         	<table style="width: 100%;">
+	                         		<%for(int i=0;i<=products.length();i+=3){%>
+	                         		  <tr>
+	                         		  	<% int z = (i%3==0 && i>=3) ? 3 : i<3 ? i : i/3;
+	                         		  	for(int j=0;j<z;j++){JSONObject obj = products.getJSONObject(j);%>
+	                         		  	<td>
+			                             <div class="col-md-4 col-sm-4 col-xs-12" style="width:260px;">
+			                                 <div class="single-product">
+			                                     <div class="single-product-item">
+			                                         <div class="single-product-img clearfix hover-effect">
+			                                             <a onclick="openProductDetails('<%=obj.get("id")%>');">
+			                                                 <img class="primary-image" src="<%=obj.get("path")%>" alt="">
+			                                             </a>
+			                                         </div>
+			                                         <div class="single-product-info clearfix"> 
+			                                             <div class="pro-price">
+			                                                 <span class="new-price">Rs. <%=obj.get("price")%></span>
+			                                             </div>
+			                                             <div class="new-sale">
+			                                                 <span>new</span>
+			                                             </div>  
+			                                         </div>
+			                                         <div class="product-content text-center">
+			                                             <h3><%=obj.get("name")%></h3>
+			                                             <h4><a onclick="openProductDetails('<%=obj.get("id")%>');"></a></h4>
+			                                         </div>
+			                                     </div>
+			                                 </div>
+			                               </div>
+			                             <td>
+			                        	<%}%>     
+		                               </tr>
+		                            <%}}%>
+	                         	</table>
 	                         </div>    
 	                     </div>
                  	</div>
              	</div>   
 	            <div class="row">
-	                 <div class="col-xs-12" style="width:1026px">   
+	                 <div>   
 	                     <div class="shop-item-filter bottom">
 	                     <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs"></div>
-	                         <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs" style="width:100%">
+	                         <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs" style="width:100%;padding: 30px;">
 								<div id="pagination-container" class="light-theme simple-pagination"></div> 
 	                         </div>    
 	                     </div>
@@ -301,6 +366,10 @@ body {
      </div>
  </div>
  </div> 
+ </div>
+ 
+ 
+ 
 <input type="hidden" id="subCategory" value="all">
 <input type="hidden" id="type" value="all">
 <input type="hidden" id="orientation" value="all">
@@ -313,6 +382,24 @@ body {
 <script>
 $(document).ready(function(){
 	pagination();
+	if(location.pathname == '/shop'){
+		var hashes = window.location.href.split('#');
+		if(hashes.length > 2){
+			if(hashes[1] == "type"){
+				$('#'+hashes[2]).click();
+			}else{
+				$('#'+hashes[1]).click();
+				$('#'+hashes[2]).click();
+			}	
+		}
+	}
+//	window.history.pushState('shop', 'SANA', '/shop');
+//	if(selector[0]=='type'){
+//		$('#'+selector[1]).click();
+//	}else{
+//		$('#'+selector[0]).click();
+//		$('#'+selector[1]).click();
+//	}
 });
 function pagination(){
 	$('#pagination-container').pagination({
@@ -331,4 +418,14 @@ function pagination(){
 	    }
 	});
 }
+function showCriteriaSlider(){
+ 	$('.criteriaClass, .hideLayer').show();	
+}
+$(document).click(function(e) {
+    var container = $(".criteriaClass");
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+    	$(".criteriaClass, .hideLayer").hide();
+    }
+});
 </script>

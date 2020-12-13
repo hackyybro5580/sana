@@ -28,16 +28,7 @@ public class SanaAction{
 		 try {
 			 request  = ServletActionContext.getRequest();
 			 response = ServletActionContext.getResponse();
-			 Cookie cookie = new Cookie("isMobile", "false");
 				
-			 if(request.getHeader("User-Agent").contains("Mobi")) {
-				 cookie = new Cookie("isMobile", "true");
-				 request.setAttribute("isFirstVisit", false);
-				 response.addCookie(cookie);
-			 } else {
-				 response.addCookie(cookie);
-			 }
-			 
 			 if(requestObj==null) {
 			     requestObj = new JSONObject();
 				 requestObj.put("sliderContent", limitShowCaseItems(PropertyUtil.getValue("sliderContent")));
@@ -99,7 +90,7 @@ public class SanaAction{
 //			 }
 			 boolean isFirstVisit = isFirstVisit();
 			 if(isFirstVisit) {
-				 cookie = new Cookie("isFirstVisit", "false");
+				 Cookie cookie = new Cookie("isFirstVisit", "false");
 				 response.addCookie(cookie);
 			 }
 			 request.setAttribute("isFirstVisit", isFirstVisit);
@@ -107,12 +98,13 @@ public class SanaAction{
 		 }catch(Exception e) {
 			 result = "error";
 		 }
-		 result = Boolean.valueOf(isMobile()) ? "mob_"+result : result;
+		 result = isMobile() ? "mob_"+result : result;
 		 return result;
 	}
 	
 	public String addToCart() {
 		execute();
+		String result="success";
 		try {
 			String productId = request.getParameter("id");
 			String count = request.getParameter("count");
@@ -164,7 +156,8 @@ public class SanaAction{
 			cookie.setMaxAge(3600 * 24 * 365 * 1);	//Expires in one year
 			response.addCookie(cookie);
 			request.setAttribute("cart", cart);
-			return "success";
+			result = isMobile() ? "mob_"+result : result;
+			return result;
 		}catch(Exception e) {
 			return "error";
 		}
@@ -172,12 +165,12 @@ public class SanaAction{
 	
 	public String removeFromCart() {
 		execute();
-		String action = "success";
+		String result = "success";
 		try {
 			String productId = request.getParameter("id");
 			String isCartPage = request.getParameter("isCartPage");
 			if(isCartPage!=null && isCartPage.equals("true")) {
-				action = "showCartPage";
+				result = "showCartPage";
 			}
 			String items = getCartItemsFromCookie();
 			items = items.replaceAll("("+productId+"+#\\w+,?)", "");
@@ -206,9 +199,10 @@ public class SanaAction{
 
 			request.setAttribute("cart", cart);
 		}catch(Exception e) {
-			action = "error";
+			result = "error";
 		}
-		return action;
+		result = isMobile() ? "mob_"+result : result;
+		return result;
 	}
 	
 	public String getCartItemsFromCookie() {
@@ -224,16 +218,8 @@ public class SanaAction{
 		 return "";
 	}
 	
-	public String isMobile() {
-		Cookie[] cookies = request.getCookies();
-		 if(cookies!=null) {
-			 for(Cookie cookie : cookies) {
-				 if(cookie.getName().equals("isMobile")) {
-					 return cookie.getValue();
-				 }
-			 }
-		 }
-		 return "";
+	public boolean isMobile() {
+		 return request.getHeader("User-Agent").contains("Mobi") ? true : false;
 	}
 	
 	public boolean hasAgreedToCookiePolicy() {
@@ -263,6 +249,7 @@ public class SanaAction{
 	
 	public String cart() {
 		execute();
+		String result = "success";
 		try {
 			String items = getCartItemsFromCookie();
 			JSONArray cart = new JSONArray();
@@ -281,7 +268,8 @@ public class SanaAction{
 				}
 			}
 			request.setAttribute("cart", cart);
-			return "success";
+			result = isMobile() ? "mob_"+result : result;
+			return result;
 		}catch(Exception e) {
 			return "error";
 		}
@@ -314,6 +302,7 @@ public class SanaAction{
 	public String shop() {
 		execute();
 		JSONArray allProducts = new JSONArray();
+		String result = "success";
 		try {
 			String criteria = "select * from products {0} {1} {2}";
 			
@@ -489,7 +478,8 @@ public class SanaAction{
 		}
 		 
 		request.setAttribute("products", allProducts);
-		return "success";
+		result = isMobile() ? "mob_"+result : result;
+		return result;
 	}
 	
 	public String mailTemplate() {
@@ -522,6 +512,7 @@ public class SanaAction{
 	
 	public String productDescription() {
 		execute();
+		String result = "success";
 		try {
 			cart();
 			JSONObject prodObj = (JSONObject)products.get(request.getParameter("prodId")+"");
@@ -537,7 +528,8 @@ public class SanaAction{
 		}catch(Exception e) {
 			
 		}
-		return "success";
+		result = isMobile() ? "mob_"+result : result;
+		return result;
 	}
  }
 

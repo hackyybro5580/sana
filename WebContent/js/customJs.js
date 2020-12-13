@@ -5,12 +5,19 @@ window.onload = function() {
   return check;
 };
 function addToCart(id, name, count){
+	$('.product-details-area, #grid').loadingView({'state':true});
 	$.post("/addToCart",{"id":id,"count":count},
 		function(data, textStatus, jqXHR){
-			var shoppingCart = $(data).find('#shoppingCart');
+		if($('#cartContainer')){
+			location.reload();
+		}else{
+			data = $(data);
+			var shoppingCart = data.find('#shoppingCart');
 			if(shoppingCart.length>0){
 				$('#shoppingCart').replaceWith(shoppingCart);
 			}
+		}
+		$('.product-details-area, #grid').loadingView({'state':false});
 		//Notifier
 		$.notify({
 			title: '<strong>'+name+'</strong>',
@@ -31,24 +38,30 @@ function addToCart(id, name, count){
 function removeFromCart(id, name, currObj, count){
 	$.post("/removeFromCart",{"id":id,"isCartPage":"true"},
 			function(data, textStatus, jqXHR){
-				if($('div.cart-area').length>0){
-					var cartPage = $(data).find('div.cart-area');
-					$('div.cart-area').replaceWith(cartPage);
-					
-					var shoppingCart = $(data).find('#shoppingCart');
-					if(shoppingCart.length>0){
-						$('#shoppingCart').replaceWith(shoppingCart);
+				if($('#cartContainer')){
+					if($('#cartContainer')){
+						location.reload();
 					}
 				}else{
-					if(data!="error"){
-						if($(currObj).parents().find('li.single-cart-item.clearfix').length>2){
-							currObj.parentNode.parentElement.remove();
-							var cartLength = $('#cartLength');
-							cartLength.text(cartLength.text()-1);
-						}else{
-							var shoppingCart = $(data).find('#shoppingCart');
-							if(shoppingCart.length>0){
-								$('#shoppingCart').replaceWith(shoppingCart);
+					if($('div.cart-area').length>0){
+						var cartPage = $(data).find('div.cart-area');
+						$('div.cart-area').replaceWith(cartPage);
+						
+						var shoppingCart = $(data).find('#shoppingCart');
+						if(shoppingCart.length>0){
+							$('#shoppingCart').replaceWith(shoppingCart);
+						}
+					}else{
+						if(data!="error"){
+							if($(currObj).parents().find('li.single-cart-item.clearfix').length>2){
+								currObj.parentNode.parentElement.remove();
+								var cartLength = $('#cartLength');
+								cartLength.text(cartLength.text()-1);
+							}else{
+								var shoppingCart = $(data).find('#shoppingCart');
+								if(shoppingCart.length>0){
+									$('#shoppingCart').replaceWith(shoppingCart);
+								}
 							}
 						}
 					}
@@ -156,6 +169,7 @@ function getProducts(){
 		page = "1";
 	}
 	var sortOrder = $('#sortOrder').val();
+	$('#grid').loadingView({'state':true});
 	return $.post("/shop",{"crit":subCategory+"#"+type+"#"+orientation+"#"+priceOrder+"#"+color+"#"+sortOrder+"#"+limit+"#"+page},
 		function(data, textStatus, jqXHR){
 		data = $(data);
@@ -164,6 +178,7 @@ function getProducts(){
 			$(replaceElement).replaceWith(products);
 			$('#totProducts').val(data.filter('#totProducts').val());
 		}
+		$('#grid').loadingView({'state':false});
 	});
 }
 function setSubCategoryAndFetch(currObj){
@@ -211,21 +226,26 @@ function fetchProductsAndApplyPagination(){
 	});
 }
 function openShopPage(currObj){
+//	currObj = $(currObj);
+//	var postURL = "/shop#"+currObj.attr('value');
+//	var selector = currObj.attr('value').split('#'); 
+//	$.post(postURL,
+//		function(data, textStatus, jqXHR){
+//		$("html").html(data);
+//	}).done(function(){
+//		window.history.pushState('shop', 'SANA', '/shop');
+//		if(selector[0]=='type'){
+//			$('#'+selector[1]).click();
+//		}else{
+//			$('#'+selector[0]).click();
+//			$('#'+selector[1]).click();
+//		}
+//	});
+	
 	currObj = $(currObj);
 	var postURL = "/shop#"+currObj.attr('value');
-	var selector = currObj.attr('value').split('#'); 
-	$.post(postURL,
-		function(data, textStatus, jqXHR){
-		$("html").html(data);
-	}).done(function(){
-		window.history.pushState('shop', 'SANA', '/shop');
-		if(selector[0]=='type'){
-			$('#'+selector[1]).click();
-		}else{
-			$('#'+selector[0]).click();
-			$('#'+selector[1]).click();
-		}
-	});
+	$('html').loadingView({'state':true});
+	window.open(postURL, "_self");
 }
 function openProductDetails(productId){
 	window.open("/productDescription?prodId="+productId);

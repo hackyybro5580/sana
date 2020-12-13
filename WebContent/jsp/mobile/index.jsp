@@ -245,6 +245,18 @@ h3.ti7{
 .showCaseItems{
 	padding: 2% !important;
 }
+.date-comment h4, .blog-content h4 a, .blog-content p, .date-comment h5, .fa-share-alt, .fa-heart-o{
+	font-size: 50px;
+}
+.blog-content h4, .blog-content p{
+	padding-bottom: 24px;
+}
+#scrollUp	{
+	display : none !important;
+}
+.single-cart-item	{
+	border-bottom: 1px solid #dbc7b6;
+}
 </style>
 <%
 //boolean hasAggreed = Boolean.valueOf(request.getAttribute("hasAgreed")+"");
@@ -463,7 +475,7 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 	             <div class="center-align">
                  <table style="width: 100%;">
 					<tr>
-						<%for(int i=0;i<latestNews.length();i++){JSONObject obj = latestNews.getJSONObject(i);%>
+						<%JSONObject obj = latestNews.getJSONObject(0);%>
 						<td>
 							<div style="border: 1px solid #dddddd;">
 		                         <div class="blogContent">
@@ -482,7 +494,6 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 		                                     <p><%=obj.get("title3")%></p>   
 		                                 </div>
 		                                 <div class="continue-reading">
-		                                     <a href="blog-details.html">Continue Reading.</a>
 		                                     <div class="blog-icon">
 		                                         <ul>
 		                                             <li><a href="<%=obj.get("postURL")%>"><i class="fa fa-share-alt"></i></a></li>
@@ -494,9 +505,39 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 		                         </div>
 		                     </div>
 						</td>
-						<%}%>
 					</tr>
-
+					<tr>
+						<%obj = latestNews.getJSONObject(1);%>
+						<td>
+							<div style="border: 1px solid #dddddd;">
+		                         <div class="blogContent">
+		                             <div class="single-latest-blog-img">
+		                                 <a href="blog-details.html">
+		                                     <img class="dim" src="<%=obj.get("path")%>" alt="">
+		                                 </a>
+		                             </div>
+		                             <div class="single-latest-blog-text">
+		                                 <div class="date-comment clearfix">
+		                                     <h4><%=obj.get("title1")%></h4>
+		                                     <h5><%=obj.get("date")%></h5>   
+		                                 </div>
+		                                 <div class="blog-content">
+		                                     <h4><a href="<%=obj.get("postURL")%>"><%=obj.get("title2")%></a></h4>
+		                                     <p><%=obj.get("title3")%></p>   
+		                                 </div>
+		                                 <div class="continue-reading">
+		                                     <div class="blog-icon">
+		                                         <ul>
+		                                             <li><a href="<%=obj.get("postURL")%>"><i class="fa fa-share-alt"></i></a></li>
+		                                             <li><a href="<%=obj.get("likeURL")%>"><i class="fa fa-heart-o"></i></a></li>
+		                                         </ul>
+		                                     </div> 
+		                                 </div>
+		                             </div>
+		                         </div>
+		                     </div>
+						</td>
+					</tr>
 				</table>
                  </div>
              </div> 

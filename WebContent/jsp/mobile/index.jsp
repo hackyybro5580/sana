@@ -258,16 +258,7 @@ h3.ti7{
 	border-bottom: 1px solid #dbc7b6;
 }
 </style>
-<%
-//boolean hasAggreed = Boolean.valueOf(request.getAttribute("hasAgreed")+"");
-boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
-%>
  <body>
- 	 <%if(isFirstVisit) {%>
- 	 <div class="welcomePage">
- 	 	<img src="img/welcomePage.jpg" alt="cart">
- 	 </div>
- 	 <%}%>
       <!-- slider start -->
      <div class="slider-wrap">
          <div class="preview-2">

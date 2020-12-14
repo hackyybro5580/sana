@@ -26,10 +26,10 @@ int totProducts = (int)request.getAttribute("totProducts");
 	border: none;
 }
 .single-product-item {
-	max-width: 400px;
-	max-height: 500px;
-	width: 400px;
-    height: 500px;
+	max-width: 650px;
+    max-height: 800px;
+    width: 650px;
+    height: 800px;
 }
 .criteriaClass{
 	position: fixed;
@@ -314,9 +314,9 @@ body {
                          	<%}else{%>
 	                         <div class="row">
 	                         	<table style="width: 100%;">
-	                         		<%for(int i=0;i<=products.length();i+=3){%>
+	                         		<%for(int i=0;i<=products.length();i+=2){%>
 	                         		  <tr>
-	                         		  	<% int z = (i%3==0 && i>=3) ? 3 : i<3 ? i : i/3;
+	                         		  	<% int z = (i%2==0 && i>=2) ? 2 : i<2 ? i : i/2;
 	                         		  	for(int j=0;j<z;j++){JSONObject obj = products.getJSONObject(j);%>
 	                         		  	<td>
 			                             <div class="col-md-4 col-sm-4 col-xs-12" style="width:260px;">
@@ -331,12 +331,8 @@ body {
 			                                             <div class="pro-price">
 			                                                 <span class="new-price">Rs. <%=obj.get("price")%></span>
 			                                             </div>
-			                                             <div class="new-sale">
-			                                                 <span>new</span>
-			                                             </div>  
 			                                         </div>
 			                                         <div class="product-content text-center">
-			                                             <h3><%=obj.get("name")%></h3>
 			                                             <h4><a onclick="openProductDetails('<%=obj.get("id")%>');"></a></h4>
 			                                         </div>
 			                                     </div>

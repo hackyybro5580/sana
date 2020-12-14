@@ -5,7 +5,7 @@
  <meta http-equiv="x-ua-compatible" content="ie=edge">
  <title>Home || Sana Cards || Celebrate like you deserve</title>
  <meta name="description" content="">
- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=0">
+ <meta name="viewport" content="width=device-width, maximum-scale=0, initial-scale=0, user-scalable=no">
  
 <!-- Google Fonts
 ============================================ -->		

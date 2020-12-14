@@ -12,6 +12,7 @@
 	JSONArray engagementInvitations = new JSONArray(requestObj.get("engagementInvitations")+"");
 	JSONArray latestNews = new JSONArray(requestObj.get("latestNews")+"");
 	JSONArray instaFeed = new JSONArray(requestObj.get("instaFeed")+"");
+// 	boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 %>
 <style>
 .text-center{
@@ -175,16 +176,12 @@ td div{
     z-index: 999;
 }
 </style>
-<%
-//boolean hasAggreed = Boolean.valueOf(request.getAttribute("hasAgreed")+"");
-boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
-%>
+<%-- <%if(isFirstVisit) {%> --%>
+<!-- <div class="welcomePage"> -->
+<!-- 	<img src="img/welcomePage.jpg" alt="cart"> -->
+<!-- </div> -->
+<%-- <%}%> --%>
  <body>
- 	 <%if(isFirstVisit) {%>
- 	 <div class="welcomePage">
- 	 	<img src="img/welcomePage.jpg" alt="cart">
- 	 </div>
- 	 <%}%>
       <!-- slider start -->
      <div class="slider-wrap">
          <div class="preview-2">
@@ -500,7 +497,7 @@ boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 //     });
 $(window).bind('mousewheel', function(event) {
 	    if (event.originalEvent.wheelDelta) {
-	     	$('.welcomePage').fadeOut();   
+	     	$('.welcomePage').fadeOut(); 
 	    }
 	});
 </script>

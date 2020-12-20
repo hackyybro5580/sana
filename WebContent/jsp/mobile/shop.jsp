@@ -187,7 +187,7 @@ body {
                         <ul class="submenu">
                             <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#engagement" id="engagement">Engagement</a></li>
                             <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#reception" id="reception">Reception</a></li>
-                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#houseWarming" id="houseWarming">House Warming</a></li>
+                            <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#housewarming" id="housewarming">House Warming</a></li>
                             <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#inauguration" id="inauguration">Inauguration</a></li>
                             <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#earPiercing" id="earPiercing">Ear Piercing ceremony</a></li>
                             <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#namingCeremony" id="namingCeremony">Naming ceremony</a></li>

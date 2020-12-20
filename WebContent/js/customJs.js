@@ -96,6 +96,7 @@ function proceedToEnquire(){
 			if(data=="success"){
 				$('.left_comment, .section-heading, .fa.fa-close').hide();
 				$('.orderSuccess').show();
+				$('.proceedToEnquireClass').css('height', '800px');
 			}else{
 				closePopup();
 				myAlert('danger', 'Error occurred while placing your order', 'Please try again or contact us.');
@@ -245,7 +246,10 @@ function openShopPage(currObj){
 	currObj = $(currObj);
 	var postURL = "/shop#"+currObj.attr('value');
 	$('html').loadingView({'state':true});
-	window.open(postURL, "_self");
+	window.location.href = postURL;
+	if(window.location.pathname === '/shop'){
+		window.location.reload();
+	}
 }
 function openProductDetails(productId){
 	window.open("/productDescription?prodId="+productId);

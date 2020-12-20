@@ -129,7 +129,7 @@ body {
                                      <ul class="submenu">
                                          <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#engagement" id="engagement">Engagement</a></li>
                                          <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#reception" id="reception">Reception</a></li>
-                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#houseWarming" id="houseWarming">House Warming</a></li>
+                                         <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#housewarming" id="housewarming">House Warming</a></li>
                                          <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#inauguration" id="inauguration">Inauguration</a></li>
                                          <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#earPiercing" id="earPiercing">Ear Piercing ceremony</a></li>
                                          <li><a onclick="setSubCategoryAndFetch(this);" value="subCategory#namingCeremony" id="namingCeremony">Naming ceremony</a></li>
@@ -313,6 +313,16 @@ body {
 <script>
 $(document).ready(function(){
 	pagination();
+	
+	if(window.location.pathname === '/shop' && window.location.href.split('#').length>1){
+		var selector = window.location.href.split('#');
+		if(selector[1]=='type'){
+			$('#'+selector[2]).click();
+		}else{
+			$('#'+selector[1]).click();
+			$('#'+selector[2]).click();
+		}		
+	}
 });
 function pagination(){
 	$('#pagination-container').pagination({

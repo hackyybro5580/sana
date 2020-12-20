@@ -31,6 +31,7 @@
         	<result name="mob_error">mob_error</result>
         </action>
         <action name="proceedToEnquire" class="org.sana.core.SanaAction" method="proceedToEnquire"/>
+        <action name="initDB" class="org.sana.core.SanaAction" method="initDB"/>
         <action name="aboutus">
         	<result type="tiles">AboutUs</result>
         	<result type="tiles">mob_AboutUs</result>
@@ -55,7 +56,18 @@
         	<result name="error">error</result>
         	<result name="mob_error">mob_error</result>
         </action>
-        
+        <action name="CMS" class="org.sana.core.SanaAction" method="CMS">
+        	<result name="success">jsp/CMS.jsp</result>
+        	<result name="error">jsp/admin.jsp</result>
+        	<result name="login">jsp/admin.jsp</result>
+        </action>
+        <action name="viewItems" class="org.sana.core.SanaAction" method="viewItems">
+        	<result name="success">jsp/viewItems.jsp</result>
+        	<result name="blogs">jsp/blogs.jsp</result>
+        	<result name="sliderContent">jsp/sliderContent.jsp</result>
+        	<result name="error">jsp/admin.jsp</result>
+        	<result name="login">jsp/admin.jsp</result>
+        </action>
         <action name="*">
     		<result type="redirect">/homepage</result>
 		</action>

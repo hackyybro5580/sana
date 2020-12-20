@@ -5,7 +5,7 @@
  <meta http-equiv="x-ua-compatible" content="ie=edge">
  <title>Home || Sana Cards || Celebrate like you deserve</title>
  <meta name="description" content="">
- <meta name="viewport" content="width=device-width, maximum-scale=0, initial-scale=0, user-scalable=no">
+ <meta name="viewport" id="viewport" content="width=720, maximum-scale=0, initial-scale=.5, user-scalable=no, shrink-to-fit=no">
  
 <!-- Google Fonts
 ============================================ -->		
@@ -38,6 +38,10 @@ if(request.getAttribute("cart")!=null){
 }
 %>
 <style>
+#mobilePageContainer	{
+ 	 min-width: 720px; 
+     margin: 0 auto;
+}
 .active {
     color: #F05166 !important;
 }
@@ -240,7 +244,7 @@ article {
 </div>
             
 <aside class="sidebarContainer" style="display: none;">
-   <nav class="sidebar" style="width: 1200px;">
+   <nav class="sidebar" style="width: 60%">
       <div class="sidebar-content">
          <ul>
             <li class="header-menu">
@@ -290,7 +294,7 @@ article {
                   <ul>
 					<li><a onclick="openShopPage(this);" value="occassional#engagement">Engagement</a></li>
 					<li><a onclick="openShopPage(this);" value="occassional#reception">Reception</a></li>
-					<li><a onclick="openShopPage(this);" value="occassional#houseWarming">House Warming</a></li>
+					<li><a onclick="openShopPage(this);" value="occassional#housewarming">House Warming</a></li>
 					<li><a onclick="openShopPage(this);" value="occassional#inauguration">Inauguration</a></li>
 					<li><a onclick="openShopPage(this);" value="occassional#earPiercing">Ear Piercing ceremony</a></li>
 					<li><a onclick="openShopPage(this);" value="occassional#namingCeremony">Naming ceremony</a></li>
@@ -326,8 +330,8 @@ article {
             </li>
             <li style="text-align: center;color: black;margin-top: 150px;">
             	<p>Get in touch with us</p>
-            	<p>Phone: +91 1122334455</p>
-                <p>Email: hello@sanacards.com</p>
+            	<p style="display: inline-block;"> <a class="fa fa-phone" href="tel:+91 1122334455"> &nbsp; +91 1122334455</a></p>
+            	<p> <a class="fa fa-envelope" href="mailto:hello@sanacards.com" style="display: block;"> &nbsp; hello@sanacards.com</a></p>
             </li>
 			<li>
                <a href="/cart" style="width: 100%;padding: 40px 80px;"><i class="fa fa-shopping-cart" style="font-size: 70px;width: 100%;padding-left: 80px;padding: 77px;border: 2px solid #decec2; height: 195px;"><span style="font-size: 50px;padding-left:25px;float: left;">My Cart</span><span style="float:right;margin-top: 5px;font-size: 50px;" id="headerCart"><%=cart.length()%></span></i></a>
@@ -340,9 +344,9 @@ article {
 
 <div class="freezeLayer" style="display :none;">
 </div>
-<div style="float:right;width: 1200px;">
+<div style="float:right;width: 60%;">
 <aside class="cartContainer" style="display :none;">
-   <nav class="sidebar" style="width: 1200px;">
+   <nav class="sidebar" style="width: 60%">
       <div class="sidebar-content">
          <ul>
             <li class="header-menu" style="padding: 35px;border-bottom: 3px solid #decec2;color: black;">
@@ -388,6 +392,7 @@ article {
 </div>
 
 <script>
+scale = .5;
 $(function () {
   let sidebar = $('.sidebar'),
     allDropdown = $('.sidebar-dropdown'),
@@ -418,6 +423,7 @@ $(function () {
   $('#btn-hide, .btn-sidebar-close').on('click', hideSidebar);
   $('#btn-show, .btn-sidebar-show').on('click', showSidebar);
   $('.sidebar-dropdown a').on('click', dropdown);
+  apply_viewport();
 });
 
 $(document).click(function(e) {
@@ -432,5 +438,20 @@ function showMenuBar(){
 }
 function showCartMenu(){
 	$(".freezeLayer, .cartContainer").show();
+}
+pageWidth = $(window).width();
+$(window).on('resize', function() {
+  if ( pageWidth !== width ) {
+	  pageWidth = $(window).width();
+	  $('#viewport').attr('content','width='+pageWidth+', maximum-scale=0, initial-scale='+scale+', user-scalable=no, shrink-to-fit=no');
+  }
+});
+
+//mobile viewport hack
+function apply_viewport(){
+    if( /iPhone|iPod/i.test(navigator.userAgent)   ) {
+    	scale = 0.2;
+    	$('#viewport').attr('content','width='+pageWidth+', maximum-scale=0, initial-scale='+scale+', user-scalable=no, shrink-to-fit=no');
+    }
 }
 </script>

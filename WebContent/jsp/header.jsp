@@ -142,7 +142,7 @@ if(request.getAttribute("cart")!=null){
                                 <ul class="submenu-mainmenu">
 									<li><a onclick="openShopPage(this);" value="occassional#engagement">Engagement</a></li>
 									<li><a onclick="openShopPage(this);" value="occassional#reception">Reception</a></li>
-									<li><a onclick="openShopPage(this);" value="occassional#houseWarming">House Warming</a></li>
+									<li><a onclick="openShopPage(this);" value="occassional#housewarming">House Warming</a></li>
 									<li><a onclick="openShopPage(this);" value="occassional#inauguration">Inauguration</a></li>
 									<li><a onclick="openShopPage(this);" value="occassional#earPiercing">Ear Piercing ceremony</a></li>
 									<li><a onclick="openShopPage(this);" value="occassional#namingCeremony">Naming ceremony</a></li>

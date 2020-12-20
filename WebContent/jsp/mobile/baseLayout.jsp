@@ -3,7 +3,9 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
- 	<tiles:insertAttribute name = "header" />
-    <tiles:insertAttribute name = "body" />
-    <tiles:insertAttribute name = "footer" />
+	<div id="mobilePageContainer">
+ 		<tiles:insertAttribute name = "header" />
+    	<tiles:insertAttribute name = "body" />
+    	<tiles:insertAttribute name = "footer" />
+	</div>
 </html>

@@ -7,12 +7,8 @@
 	JSONArray showCaseHindu = new JSONArray(requestObj.get("showCaseHindu")+"");
 	JSONArray showCaseMuslim = new JSONArray(requestObj.get("showCaseMuslim")+"");
 	JSONArray showCaseChristian = new JSONArray(requestObj.get("showCaseChristian")+"");
-	JSONArray friendsInvitation = new JSONArray(requestObj.get("friendsInvitation")+"");
-	JSONArray thamboolamBags = new JSONArray(requestObj.get("thamboolamBags")+"");
-	JSONArray engagementInvitations = new JSONArray(requestObj.get("engagementInvitations")+"");
 	JSONArray latestNews = new JSONArray(requestObj.get("latestNews")+"");
 	JSONArray instaFeed = new JSONArray(requestObj.get("instaFeed")+"");
-// 	boolean isFirstVisit = Boolean.valueOf(request.getAttribute("isFirstVisit")+"");
 %>
 <style>
 .text-center{
@@ -340,47 +336,6 @@ td div{
      <!-- featured end -->
      
 
-     
-     
-     <!-- testimonials start -->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="section-tab">
-					<div class="section-tab-menu text-left section-heading">
-						<h3>Testimonials</h3>
-					</div> 
-		             <div class="center-align">
-						<table style="width: 100%;">
-							<tr>
-								<%for(int i=0;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
-								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
-								</td>
-								<%}%>
-							</tr>
-							<tr>
-								<%for(int i=4;i<8;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
-								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
-<!-- 									<div class="bottom50 showOnHover"> -->
-<%-- 										<div><%=obj.get("name")%></div> --%>
-<%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
-<!-- 									</div> -->
-								</td>
-								<%}%>
-							</tr>
-						</table>
-					</div>
-		         </div>
-		     </div>
-		</div>
-     <!-- testimonials end -->	
-     
-     
      <!-- client start -->
  		<div class="row">
 			<div class="col-xs-12">
@@ -424,7 +379,7 @@ td div{
 		<div class="col-xs-12">
 			<div class="section-tab">
 				<div class="section-tab-menu text-left section-heading">
-					<h3>Instagram Feed</h3>
+					<h3>Blogs</h3>
 				</div> 
 	             <div class="center-align">
                  <table style="width: 100%;">

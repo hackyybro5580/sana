@@ -32,25 +32,19 @@ public class SanaAction{
 			 if(requestObj==null) {
 			     requestObj = new JSONObject();
 				 requestObj.put("sliderContent", limitShowCaseItems(PropertyUtil.getValue("sliderContent")));
-				 requestObj.put("showCaseHindu", limitShowCaseItems(PropertyUtil.getValue("showCaseHindu")));
-				 requestObj.put("showCaseMuslim", limitShowCaseItems(PropertyUtil.getValue("showCaseMuslim")));
-				 requestObj.put("showCaseChristian", limitShowCaseItems(PropertyUtil.getValue("showCaseChristian")));
-				 requestObj.put("friendsInvitation", limitShowCaseItems(PropertyUtil.getValue("friendsInvitation")));
-				 requestObj.put("thamboolamBags", limitShowCaseItems(PropertyUtil.getValue("thamboolamBags")));
-				 requestObj.put("engagementInvitations", limitShowCaseItems(PropertyUtil.getValue("engagementInvitations")));
 				 requestObj.put("latestNews", limitShowCaseItems(PropertyUtil.getValue("latestNews")));
 				 requestObj.put("instaFeed", limitShowCaseItems(PropertyUtil.getValue("instaFeed")));
+				 requestObj.put("showCaseHindu", fetchShowCaseItems("hinduInvitation", 6));
+				 requestObj.put("showCaseMuslim", fetchShowCaseItems("muslimInvitation", 6));
+				 requestObj.put("showCaseChristian", fetchShowCaseItems("christianInvitation", 6));
 			 }
 			 if(products==null) {
 				 products = new JSONObject();	
-				 String[] productsArray = DefaultValues.productArray;
-				 for(String product : productsArray) {
-					 JSONArray item = new JSONArray(PropertyUtil.getValue(product));
-					 for(int i=0;i<item.length();i++) {
-						 JSONObject itemObj = item.getJSONObject(i);
-						 if(itemObj.has("id")) {
-							 products.put(itemObj.get("id")+"", itemObj);
-						 }
+				 JSONArray item = SQLUtil.getProductsWithCriteria("select * from products", null);
+				 for(int i=0;i<item.length();i++) {
+					 JSONObject itemObj = item.getJSONObject(i);
+					 if(itemObj.has("id")) {
+						 products.put(itemObj.get("id")+"", itemObj);
 					 }
 				 }
 			 }
@@ -468,7 +462,7 @@ public class SanaAction{
 				
 				totalProductsCrit = totalProductsCrit.replace("{0}", query);
 			}
-			allProducts = SQLUtil.getProductsWithCriteria(criteria);
+			allProducts = SQLUtil.getProductsWithCriteria(criteria, null);
 			
 			//Total pages
 			request.setAttribute("totProducts", SQLUtil.getRowsCount(totalProductsCrit));
@@ -490,6 +484,25 @@ public class SanaAction{
 			
 		}
 		return "success";
+	}
+	
+	public static JSONArray fetchShowCaseItems(String subCategory, int limit) {
+		JSONArray showCaseLimiter = new JSONArray();
+		try {
+			String criteria = "select * from products where IS_SHOW_CASE_ITEM = true and subcategory=\""+subCategory+"\" limit "+limit;
+			String type = null;
+			if(subCategory.equals("latestNews")) {
+				criteria = "select * from blogs limit "+limit;
+			}else if(subCategory.equals("sliderContent")) {
+				criteria = "select * from slidercontent limit "+limit;
+			}else {
+				subCategory = null;
+			}
+			showCaseLimiter = SQLUtil.getProductsWithCriteria(criteria, subCategory);
+		}catch(Exception e) {
+			return new JSONArray();
+		}
+		return showCaseLimiter;
 	}
 	
 	public static JSONArray limitShowCaseItems(String arrayObj) {
@@ -520,7 +533,7 @@ public class SanaAction{
 			request.setAttribute("name", prodObj.get("name"));
 			request.setAttribute("price", prodObj.get("price"));
 			request.setAttribute("path", prodObj.get("path"));
-			JSONArray images = prodObj.has("images") ? (JSONArray)prodObj.get("images") : new JSONArray();
+			JSONArray images = prodObj.has("images") && !prodObj.get("images").equals("") ? (JSONArray)prodObj.get("images") : new JSONArray();
 			if(images.length()==0) {
 				images.put(prodObj.get("path"));
 			}
@@ -530,6 +543,166 @@ public class SanaAction{
 		}
 		result = isMobile() ? "mob_"+result : result;
 		return result;
+	}
+	
+	public Boolean isUserLoggedIn() {
+		try {
+			request  = ServletActionContext.getRequest();
+			response = ServletActionContext.getResponse();
+			String[] loginSession = getLoginSession().split("#");
+			String userName = loginSession.length==3 ? loginSession[1] : request.getParameter("encrypted1");
+			String password = loginSession.length==3 ? loginSession[2] : request.getParameter("encrypted2");
+			if(password!=null && userName!=null && !password.equals("") && !userName.equals("")) {
+				if(SQLUtil.isValidUser(userName, password)) {
+					response.setStatus(HttpServletResponse.SC_ACCEPTED);
+					if(loginSession.length!=3) {
+						setLoginSession(userName, password);
+					}
+					return true;
+				}
+			}
+		}catch(Exception e) {
+		}
+		return false;
+	}
+	public void setLoginSession(String userName, String password) {
+		CryptoUtil cUtil = new CryptoUtil(PropertyUtil.getValue("encryptionKey"));
+		Cookie cookie = new Cookie("loginSession", cUtil.encrypt(request.getRemoteAddr()+"#"+userName+"#"+password));
+		response.addCookie(cookie);
+	}
+	public String getLoginSession() {
+		Cookie[] cookies = request.getCookies();
+		 CryptoUtil cUtil = new CryptoUtil(PropertyUtil.getValue("encryptionKey"));
+		 if(cookies!=null) {
+			 for(Cookie cookie : cookies) {
+				 if(cookie.getName().equals("loginSession")) {
+					 try {
+						 String returnString = cUtil.decrypt(cookie.getValue());
+						 if(returnString.split("#")[0].equals(request.getRemoteAddr())) {
+							 return returnString;
+						 }
+					 }catch(Exception e) {
+						 
+					 }
+				 }
+			 }
+		 }
+		 return "";
+	}
+	public String CMS() {
+		if(!isUserLoggedIn()) {
+			return "login";
+		}
+		try {
+			String operation = request.getParameter("type");
+			if(operation!=null) {
+				if(operation.equals("update")) {
+					JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+					String criteria = "update products set path=\""+inputData.get("path")+"\","
+														 +"name=\""+inputData.get("name")+"\","
+														 +"price="+inputData.get("price")+","
+														 +"type=\""+inputData.get("type")+"\","
+														 +"orientation=\""+inputData.get("orientation")+"\","
+														 +"color=\""+inputData.get("color")+"\","
+														 +"description=\""+inputData.get("description")+"\""
+														 +" where id=\""+inputData.get("id")+"\""
+														 ;
+					SQLUtil.executeCriteria(criteria);
+				}else if(operation.equals("create")) {
+					JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+					String criteria = "insert into products values(\""+inputData.get("id")+"\",\""
+															  +inputData.get("name")+"\","
+															  +inputData.get("price")+",\""
+															  +inputData.get("path")+"\",\""
+															  +inputData.get("type")+"\",\""
+															  +inputData.get("subCategory")+"\",\""
+															  +inputData.get("orientation")+"\",\""
+															  +inputData.get("description")+"\",\""
+															  +inputData.get("color")+"\",\""
+															  +inputData.get("images")+"\","
+															  +inputData.get("isShowCaseItem")+")"
+														 ;
+					SQLUtil.executeCriteria(criteria);
+				}else if(operation.equals("delete")) {
+					String criteria = "delete from products where id=\""+request.getParameter("inputData")+"\"";
+					SQLUtil.executeCriteria(criteria);
+				}
+			}
+		}catch(Exception e) {
+			
+		}
+		return "success";
+	}
+	public String viewItems() {
+		if(!isUserLoggedIn()) {
+			return "login";
+		}
+		try {
+			String result = "success";
+			String subcategory = request.getParameter("subcategory");
+			subcategory = subcategory == null ? "" : subcategory;
+			//Category validation
+			switch(subcategory) {
+				case "hinduInvitation":
+				case "muslimInvitation":
+				case "christianInvitation":
+				case "engagement":
+				case "reception":
+				case "babyShower":
+				case "earPiercing":
+				case "housewarming":
+				case "inauguration":
+				case "thankyouCards":
+				case "thamboolamBags":
+				case "friendsInvitation":
+				case "sliderContent":
+				case "blogs":
+					break;
+				default:
+					subcategory = "";
+			}
+			String criteria = "select * from products where SUBCATEGORY = \""+subcategory+"\"";
+			if(subcategory.equals("sliderContent")) {
+				criteria = "select * from sliderContent";
+				result = "sliderContent";
+			}else if(subcategory.equals("blogs")) {
+				criteria = "select * from blogs";
+				result = "blogs";
+			}else {
+				subcategory = null;
+			}
+			JSONArray products = SQLUtil.getProductsWithCriteria(criteria, subcategory);
+			request.setAttribute("products", products);
+			return result;
+		}catch(Exception e) {
+			return "error";
+		}
+	}
+	
+	public void initDB() {
+		PrintWriter pw = null;
+		try {
+			response = ServletActionContext.getResponse();
+			pw = response.getWriter();
+			if(!isUserLoggedIn()) {
+				pw.print("error");
+			}else {
+				pw.print("DB Initialised");
+				if(SQLUtil.initDB()) {
+					if(!SQLUtil.loadTable()) {
+						SQLUtil.loadTable();
+					}
+				}
+			}
+		}catch(Exception e) {
+			if(pw!=null) {
+				pw.print("error");
+			}
+		}finally {
+			if(pw!=null) {
+				pw.close();
+			}
+		}
 	}
  }
 

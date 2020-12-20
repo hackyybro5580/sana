@@ -52,19 +52,26 @@ public class SQLUtil {
 			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
-			smt.executeUpdate("create table products(ID varchar(50), NAME varchar(50), PRICE FLOAT, IMG_PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25))");
+//			smt.executeUpdate("create table products(ID varchar(50) NOT NULL UNIQUE, NAME varchar(50), PRICE FLOAT, PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25))");
+			smt.executeUpdate("create table products(ID varchar(50), NAME varchar(50), PRICE FLOAT, PATH text, TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25), IMAGES text, IS_SHOW_CASE_ITEM BOOLEAN DEFAULT FALSE)");
 			
-			String insertquery = "insert into products values(";
-			String[] productsArray = DefaultValues.productArray;
+			smt.executeUpdate("create table sliderContent(PATH text, TITLE1 text, TITLE2 text)");
 			
-			for(String product : productsArray) {
-				JSONArray item = new JSONArray(PropertyUtil.getValue(product));
-				for(int i=0;i<item.length();i++) {
-					JSONObject itemObj = item.getJSONObject(i);
-					smt.addBatch(insertquery + "'" + itemObj.get("id")+ "'" +","+  "'" +itemObj.get("name")+ "'" +","+itemObj.get("price")+","+ "'" +itemObj.get("path")+ "'" +","+ "'" +itemObj.get("type")+ "'" +","+ "'" +itemObj.get("subcategory")+ "'" +","+ "'" +itemObj.get("orientation")+ "'" +","+ "'" +itemObj.get("description")+ "'"+", "+ "'" +itemObj.get("color")+ "'" +");");
-				}
-			}
-			smt.executeBatch();
+			smt.executeUpdate("create table blogs(DATE text,LIKE_URL text, POST_URL text, PATH text, TITLE1 text, TITLE2 text, TITLE3 text)");
+			
+			//Insert into DB from propertyFile starts
+//			String insertquery = "insert into products values(";
+//			String[] productsArray = DefaultValues.productArray;
+//			
+//			for(String product : productsArray) {
+//				JSONArray item = new JSONArray(PropertyUtil.getValue(product));
+//				for(int i=0;i<item.length();i++) {
+//					JSONObject itemObj = item.getJSONObject(i);
+//					smt.addBatch(insertquery + "'" + itemObj.get("id")+ "'" +","+  "'" +itemObj.get("name")+ "'" +","+itemObj.get("price")+","+ "'" +itemObj.get("path")+ "'" +","+ "'" +itemObj.get("type")+ "'" +","+ "'" +itemObj.get("subcategory")+ "'" +","+ "'" +itemObj.get("orientation")+ "'" +","+ "'" +itemObj.get("description")+ "'"+", "+ "'" +itemObj.get("color")+ "'" +");");
+//				}
+//			}
+//			smt.executeBatch();
+			//Insert into DB from propertyFile ends
 			result = Boolean.TRUE;
 		}
 		catch(SQLException e) {
@@ -72,9 +79,9 @@ public class SQLUtil {
 			if(message!=null && message.endsWith("already exists")) {
 				con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
 				//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
-				Statement smt = con.createStatement();
-				smt.executeUpdate("drop table products");
-				result = Boolean.FALSE;
+//				Statement smt = con.createStatement();
+//				smt.executeUpdate("drop table products");
+//				result = Boolean.FALSE;
 			}
 		}
 		catch(Exception e1) {
@@ -88,7 +95,7 @@ public class SQLUtil {
 		return result;
 	}
 	
-	public static JSONArray getProductsWithCriteria(String criteria) {
+	public static JSONArray getProductsWithCriteria(String criteria, String type) {
 		Connection con = null;
 		JSONArray responseArray = new JSONArray();
 		try{  
@@ -100,15 +107,31 @@ public class SQLUtil {
 			JSONObject obj = null;
 			while(rs.next()) {
 				obj = new JSONObject();
-				obj.put("id", rs.getString(PRODUCTS.ID));
-				obj.put("name", rs.getString(PRODUCTS.NAME));
-				obj.put("price", rs.getString(PRODUCTS.PRICE));
-				obj.put("path", rs.getString(PRODUCTS.IMG_PATH));
-				obj.put("type", rs.getString(PRODUCTS.TYPE));
-				obj.put("subcategory", rs.getString(PRODUCTS.SUBCATEGORY));
-				obj.put("orientation", rs.getString(PRODUCTS.ORIENTATION));
-				obj.put("description", rs.getString(PRODUCTS.DESCRIPTION));
-				obj.put("color", rs.getString(PRODUCTS.COLOR));
+				if(type==null) {
+					obj.put("id", rs.getString(PRODUCTS.ID));
+					obj.put("name", rs.getString(PRODUCTS.NAME));
+					obj.put("price", rs.getString(PRODUCTS.PRICE));
+					obj.put("path", rs.getString(PRODUCTS.PATH));
+					obj.put("type", rs.getString(PRODUCTS.TYPE));
+					obj.put("subcategory", rs.getString(PRODUCTS.SUBCATEGORY));
+					obj.put("orientation", rs.getString(PRODUCTS.ORIENTATION));
+					obj.put("description", rs.getString(PRODUCTS.DESCRIPTION));
+					obj.put("color", rs.getString(PRODUCTS.COLOR));
+					obj.put("images", rs.getString(PRODUCTS.IMAGES));
+					obj.put("isShowCaseItem", rs.getString(PRODUCTS.IS_SHOW_CASE_ITEM));
+				}else if(type.equals("latestNews")) {
+					obj.put("date", rs.getString("date"));
+					obj.put("likeURL", rs.getString("likeURL"));
+					obj.put("path", rs.getString("path"));
+					obj.put("postURL", rs.getString("postURL"));
+					obj.put("title1", rs.getString("title1"));
+					obj.put("title2", rs.getString("title2"));
+					obj.put("title3", rs.getString("title3"));
+				}else if(type.equals("sliderContent")) {
+					obj.put("path", rs.getString("path"));
+					obj.put("title1", rs.getString("title1"));
+					obj.put("title2", rs.getString("title2"));
+				}
 				responseArray.put(obj);
 			}
 			rs.close();
@@ -150,5 +173,53 @@ public class SQLUtil {
 			}
 		}
 		return rowsCount;
+	}
+	
+	public static boolean isValidUser(String username, String password) {
+		Connection con = null;
+		boolean result = false;
+		try{  
+			Class.forName("com.mysql.jdbc.Driver");  
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery("select password from sanaadmin where id=\""+username+"\"");
+			rs.next();
+			result = rs.getString("password").equals(password) ? true : false;
+			rs.close();
+		}catch(Exception e) {
+			return result;
+		}finally {
+			try {
+				if(con!=null) {
+					con.close();
+				}
+			}catch(Exception e) {
+				return result;
+			}
+		}
+		return result;
+	}
+	
+	public static boolean executeCriteria(String criteria) {
+		Connection con = null;
+		try{  
+			Class.forName("com.mysql.jdbc.Driver");  
+			con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			Statement smt = con.createStatement();
+			smt.executeUpdate(criteria);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}finally {
+			try {
+				if(con!=null) {
+					con.close();
+				}
+			}catch(Exception e) {
+				return false;
+			}
+		}
 	}
 }

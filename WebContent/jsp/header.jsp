@@ -37,6 +37,12 @@ if(request.getAttribute("cart")!=null){
 }
 %>
 <style>
+* {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
 .active {
     color: #F05166 !important;
 }

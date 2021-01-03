@@ -373,9 +373,6 @@ span.cart-info a:hover{
     position: absolute;
     width: 0px;
     opacity: 0;
-    -webkit-transition: all 0.5s ease 0s;
-    -o-transition: all 0.5s ease 0s;
-    transition: all 0.5s ease 0s;
 }
 .mainmenu ul > li::after, .description-tab-menu ul li::after, .mega-menu span a.title:after {
     background: #decec2 none repeat scroll 0 0;
@@ -386,9 +383,6 @@ span.cart-info a:hover{
     position: absolute;
     width: 1px;
     opacity: 0;
-    -webkit-transition: all 0.5s ease 0s;
-    -o-transition: all 0.5s ease 0s;
-    transition: all 0.5s ease 0s;
 }
 .mega-menu span a.title:before, .mega-menu span a.title:after{
     opacity: 1;

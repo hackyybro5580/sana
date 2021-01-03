@@ -29,8 +29,30 @@
 	height: 580px;
 	z-index: 99;
 }
+.product-details-area .col-md-6 {
+    width: 41%;
+}
+.fa{
+	cursor:pointer;	
+}
 </style>
 <script>
+function updateValue(operation){
+	  var quanntitybox = $('#quantityBox');
+	  if(operation==='+'){
+		  quanntitybox.val(parseInt(quanntitybox.val())+100);
+	  }else if(operation==='-'){
+		  if(quanntitybox.val()>100){
+			  quanntitybox.val(parseInt(quanntitybox.val())-100);
+		  }
+	  }
+}
+function checkValue(){
+	var quanntitybox = $('#quantityBox');
+	  if(!parseInt(quanntitybox.val()) || parseInt(quanntitybox.val()) < 0){
+		  quanntitybox.val(100);
+	  }
+}
 function imageZoom(imgID, resultID) {
   var img, lens, result, cx, cy;
   img = document.getElementById(imgID);
@@ -118,12 +140,12 @@ JSONArray images = (JSONArray)request.getAttribute("images");
                             <%}%>
                         </ul>
                     </div>
-                    <div style="display: flex;width: 79%;margin-left: 30%;position: relative;">
+                    <div style="display: flex;width: 79%;position: relative;">
                     	<img class="image" id="myimage" src="<%=request.getAttribute("path")%>" alt="big-1">
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="productDescription" style="position:relative;">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="productDescription" style="position:relative;width: 50%;">
                 <div class="product-detail shop-product-text" style="position:absolute;z-index:51;">
                     <h4><a href="#"><%=request.getAttribute("name")%></a></h4>
                     <div class="price-rating-container">    
@@ -131,12 +153,13 @@ JSONArray images = (JSONArray)request.getAttribute("images");
                     </div>
                     <div class="availability">AVAILABILITY : <span> In stock</span></div>
                     <h5 class="overview">Overview :</h5>
-                    <p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor indunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
+                    <p class="product-desc"><%=request.getAttribute("description")%>.</p>
+                    <p>*Printing and Shipping Charges Extra</p>
+                    <div><i class="fa fa-minus p10" onclick="updateValue('-');" aria-hidden="true"></i><input type="text" id="quantityBox" onblur="checkValue();" style="width:50px" class="noselect" value="100"></input><i class="fa fa-plus p10" aria-hidden="true" onclick="updateValue('+');"></i></div>
                     
                     
                     <div class="shop-buttons">
-                        <a onclick="addToCart('<%=request.getAttribute("id")%>','<%=request.getAttribute("name")%>');" class="cart-btn"><span>Add to Bag</span></a>
+                        <a onclick="addToCart('<%=request.getAttribute("id")%>','<%=request.getAttribute("name")%>', $('#quantityBox').val());" class="cart-btn"><span>Add to Bag</span></a>
                     </div>
                     <div class="share">
                        <h5 class="share">share this on :</h5>

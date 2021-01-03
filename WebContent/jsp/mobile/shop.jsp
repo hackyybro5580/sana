@@ -8,6 +8,33 @@ int totProducts = (int)request.getAttribute("totProducts");
 .section-title li {
 	padding: 30px;
 }
+.submenu li span {
+	width: 50px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid;
+    margin-right: 30px;
+    float: left;
+    margin-top: 10px;
+}
+.black{
+	background: black;
+}
+.white{
+	background: white;
+}
+.red{
+	background: red;
+}
+.blue{
+	background: blue;
+}
+.pink{
+	background: pink;
+}
+.yellow{
+	background: yellow;
+}
 .hideLayer {
 	position: fixed;
 	top: 0;
@@ -41,8 +68,8 @@ int totProducts = (int)request.getAttribute("totProducts");
     width: 800px;
     height: 100%;
 	bottom:0;
-	overflow-y:hidden;
-    overflow-x:scroll;
+	overflow-y:scroll;
+    overflow-x:hidden;
 }
 .criteriaSlider{
 	position: fixed;
@@ -62,9 +89,6 @@ int totProducts = (int)request.getAttribute("totProducts");
 }
 .active{
 	color : #F05166 !important;
-}
-a:hover{
-	color: #F05166 !important;
 }
 //Pagination Style Starts
 body {
@@ -119,7 +143,7 @@ body {
 .simple-pagination li a,
 .simple-pagination li span {
 	color: #666;
-	padding: 5px 10px;
+	padding: 3px 17px;
 	text-decoration: none;
 	border: 1px solid #EEE;
 	background-color: #FFF;
@@ -209,11 +233,11 @@ body {
             <div class="section-title">
                 <h4>Type</h4>
 	                <ul class="submenu" style="display: contents;">
-	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
-	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
-	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
-	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
-	                	<li><a onclick="setSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
+	                	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
+	                	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
+	                	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
+	                	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
+	                	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
                    	</ul>
                    </div>
                </div>
@@ -240,20 +264,20 @@ body {
                 		</ul>
 		            </div>
 		        </div>
-        
-		        <div class="single-left-widget" style="padding:37px 25px 22px;display: none;">
-		           <div class="section-title">
-		               <h4>filter by color</h4>
-		               <ul class="color-widget">
-		                   <li class="active"><span class="black"></span><a onclick="setSubCategoryAndFetch(this);" value="color#black">black</a></li>
-		                   <li><span class="white"></span><a onclick="setSubCategoryAndFetch(this);" value="color#white">white</a></li>
-		                   <li><span class="red"></span><a onclick="setSubCategoryAndFetch(this);" value="color#red">red</a></li>
-		                   <li><span class="blue"></span><a onclick="setSubCategoryAndFetch(this);" value="color#blue">blue</a></li>
-		                   <li><span class="pink"></span><a onclick="setSubCategoryAndFetch(this);" value="color#pink">pink</a></li>
-		                   <li><span class="yellow"></span><a onclick="setSubCategoryAndFetch(this);" value="color#yellow">yellow</a></li>
-		               </ul>
-		           </div>
-		       </div>
+		        
+				<div class="single-left-widget">
+                   <div class="section-title">
+                       <h4>filter by color</h4>
+                       <ul class="submenu" style="display: contents;">
+	                	   <li><span class="black"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#black">black</a></li>
+		                   <li><span class="white"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#white">white</a></li>
+		                   <li><span class="red"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#red">red</a></li>
+		                   <li><span class="blue"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#blue">blue</a></li>
+		                   <li><span class="pink"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#pink">pink</a></li>
+		                   <li><span class="yellow"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#yellow">yellow</a></li>
+                		</ul>
+		            </div>
+		        </div>
     </div>
 </div> 
              
@@ -407,7 +431,7 @@ function pagination(){
 	        			}
 	        			done(result);
 	    			},
-		pageSize: $('#limit').find(":selected").text(),
+		pageSize: 12,
 		callback: function(data, pagination) {
 	        $('#page').val($('.paginationjs-page.J-paginationjs-page.active').attr('data-num'));
 	        getProducts();	

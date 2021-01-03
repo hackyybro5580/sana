@@ -61,11 +61,10 @@
                     <div class="footer-widget">
                         <h5>Services</h5>
                         <ul>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="about.html">Return Policy</a></li>
-                            <li><a href="blog.html">Our Blog</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li class="hidden-sm"><a href="#">Terms &amp; Condition</a></li>
+                            <li><a href="/aboutus#aboutUs">About Us</a></li>
+                            <li><a href="/aboutus#returnsPolicy">Return Policy</a></li>
+                            <li><a href="/aboutus#contactUs">Contact Us</a></li>
+                            <li class="hidden-sm"><a href="/aboutus#termsAndconditions">Terms &amp; Condition</a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,10 +72,7 @@
                     <div class="footer-widget">
                         <h5>Order</h5>
                         <ul>
-                            <li><a href="#">How To Order</a></li>
-                            <li><a href="#">Samples</a></li>
-                            <li><a href="#">Wording Tips + Examples</a></li>
-                            <li><a href="#">Extras Price List</a></li>
+                            <li><a href="/aboutus#howToOrder">How To Order</a></li>
                         </ul>
                     </div>
                 </div>

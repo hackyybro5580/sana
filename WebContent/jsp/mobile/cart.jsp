@@ -61,7 +61,7 @@ if(request.getAttribute("cart")!=null){
     width: 85%;
 }
 </style>
-<div id="cartPage" style="min-height: 1200px;">
+<div id="cartPage" style="min-height: 1300px;">
  <!-- breadcrumb start -->
  <div class="breadcrumb-area">
      <div class="container">

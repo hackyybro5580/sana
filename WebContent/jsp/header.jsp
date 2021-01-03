@@ -5,7 +5,7 @@
  <meta http-equiv="x-ua-compatible" content="ie=edge">
  <title>Home || Sana Cards || Celebrate like you deserve</title>
  <meta name="description" content="">
- <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="viewport" content="width=1440, initial-scale=1">
  
 <!-- Google Fonts
 ============================================ -->		
@@ -43,10 +43,13 @@ if(request.getAttribute("cart")!=null){
 .paginationjs-pages ul li{
 	font-size: 14px !important;
 }
+html, body {  
+	min-width:1440px !important; 
+}
 </style>
 <header class="header-area" >
     <div class="header-top-area">
-        <div class="container">
+        <div class="container" style="width:1370px !important;">
             <div class="row">
                 <div class="col-md-6 col-sm-6 hidden-xs">
                     <div class="header-top-left">
@@ -61,7 +64,7 @@ if(request.getAttribute("cart")!=null){
                     <div class="header-top-right">
                         <div class="order-cart">
                             <ul>
-                                <li class="howto"><a href="shop.html">How to Order</a></li>
+                                <li class="howto"><a href="/aboutus#howToOrder">How to Order</a></li>
                                 <li class="cart" id="shoppingCart"><a href="/cart"><img src="img/icon/cart.png" alt="cart"><p id="cartLength"><%=cart.length()%></p></a>
                                       <%if(cart.length()>0){%>
                                       	<ul class="submenu-mainmenu" style="overflow:scroll;max-height:300px">
@@ -101,14 +104,14 @@ if(request.getAttribute("cart")!=null){
     </div>	   
 </header>
 	<div class="logo-center">
-		<div class="logo ">
-			<a href="/homepage"><img id="sanaCard" src="img/logo.png" style="width: 8%;" alt="SANA CARDS"></a>
+		<div class="logo" style="background: white;">
+			<a href="/homepage"><img id="sanaCard" src="img/sanaLogo.jpg" style="width: 30%;" alt="SANA CARDS"></a>
 		</div>
 	</div>
    <div class="main-header-area" id="myHeader">
-    <div class="container">
-    	<div class="logoImg" style="width: 73px;position: absolute;display:none;top: 23px;">
-    		<a href="/homepage"><img src="img/logo/logo.png" alt="SANA CARDS"></a>
+    <div class="container" style="width:1370px !important;">
+    	<div class="logoImg" style="width: 70px;position: absolute;display:none;">
+    		<a href="/homepage"><img src="img/logo.png" alt="SANA CARDS"></a>
     	</div>
         <div class="row">
             <div>

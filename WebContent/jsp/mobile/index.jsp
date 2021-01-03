@@ -7,7 +7,7 @@
 	JSONArray showCaseHindu = new JSONArray(requestObj.get("showCaseHindu")+"");
 	JSONArray showCaseMuslim = new JSONArray(requestObj.get("showCaseMuslim")+"");
 	JSONArray showCaseChristian = new JSONArray(requestObj.get("showCaseChristian")+"");
-	JSONArray latestNews = new JSONArray(requestObj.get("latestNews")+"");
+	JSONArray blogs = new JSONArray(requestObj.get("blogs")+"");
 	JSONArray instaFeed = new JSONArray(requestObj.get("instaFeed")+"");
 %>
 <style>
@@ -430,7 +430,7 @@ h3.ti7{
 	             <div class="center-align">
                  <table style="width: 100%;">
 					<tr>
-						<%JSONObject obj = latestNews.getJSONObject(0);%>
+						<%JSONObject obj = blogs.getJSONObject(0);%>
 						<td>
 							<div style="border: 1px solid #dddddd;">
 		                         <div class="blogContent">
@@ -462,7 +462,7 @@ h3.ti7{
 						</td>
 					</tr>
 					<tr>
-						<%obj = latestNews.getJSONObject(1);%>
+						<%obj = blogs.getJSONObject(1);%>
 						<td>
 							<div style="border: 1px solid #dddddd;">
 		                         <div class="blogContent">

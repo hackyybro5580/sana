@@ -32,9 +32,9 @@
         </action>
         <action name="proceedToEnquire" class="org.sana.core.SanaAction" method="proceedToEnquire"/>
         <action name="initDB" class="org.sana.core.SanaAction" method="initDB"/>
-        <action name="aboutus">
-        	<result type="tiles">AboutUs</result>
-        	<result type="tiles">mob_AboutUs</result>
+        <action name="aboutus" class="org.sana.core.SanaAction" method="aboutUS">
+        	<result name="success" type="tiles">AboutUs</result>
+        	<result name="mob_success" type="tiles">mob_AboutUs</result>
         	<result name="error">error</result>
         	<result name="mob_error">mob_error</result>
         </action>

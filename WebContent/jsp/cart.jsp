@@ -7,6 +7,30 @@ if(request.getAttribute("cart")!=null){
 	cart = (JSONArray)request.getAttribute("cart");
 }
 %>
+<style>
+.fa{
+	cursor:pointer;	
+}
+</style>
+<script>
+function editCart(id){
+	  var quanntitybox = $('#'+id);
+	  if(!parseInt(quanntitybox.val()) || parseInt(quanntitybox.val()) < 0){
+		  quanntitybox.val(100);
+	  }
+	  addToCart(id, '', quanntitybox.val(), true, true);
+}
+function updateValue(operation, id){
+	  var quanntitybox = $('#'+id);
+	  if(operation==='+'){
+		  quanntitybox.val(parseInt(quanntitybox.val())+100);
+	  }else if(operation==='-'){
+		  if(quanntitybox.val()>100){
+			  quanntitybox.val(parseInt(quanntitybox.val())-100);
+		  }
+	  }
+}
+</script>
 <div id="cartPage" style="min-height: 1200px;">
  <!-- breadcrumb start -->
  <div class="breadcrumb-area">
@@ -48,7 +72,13 @@ if(request.getAttribute("cart")!=null){
                                  <td class="product_des">
                                      <h3><a href="#"><%=obj.get("name")%></a></h3>
                                  </td>
-                                 <td class="id"><%=obj.get("count")%></td>
+                                 <td class="id">
+                                 	<div>
+                                 		<i class="fa fa-minus p10" onclick="updateValue('-', '<%=obj.get("id")%>');editCart('<%=obj.get("id")%>');" aria-hidden="true"></i>
+                                 		<input type="text" id="<%=obj.get("id")%>" onblur="editCart('<%=obj.get("id")%>');" style="width:50px" class="noselect" value="<%=obj.get("count")%>"></input>
+                                 		<i class="fa fa-plus p10" aria-hidden="true" onclick="updateValue('+', '<%=obj.get("id")%>');editCart('<%=obj.get("id")%>');"></i>
+                                 	</div>
+                                 </td>
                                  <td class="p_value">Rs. <%=obj.get("totalPrice")%></td>
                                  <td class="p_action">
                                      <a onclick="removeFromCart('<%=obj.get("id")%>','<%=obj.get("name")%>');"><i class="fa fa-trash"></i></a>

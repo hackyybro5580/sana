@@ -10,6 +10,13 @@
 <script src="js/bootstrap-notify.min.js"></script>
 <script src="/js/crypto-js.js"></script>
 <style>
+.limitText{
+	display:block;
+	text-overflow: ellipsis;
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+}
 .adminClass{
 	padding : 10px;
 }
@@ -47,7 +54,7 @@ a:hover, i:hover, button:hover{
 				   <nav>
 				      <div>
 				         <ul>
-				            <li style="display:none;">
+				            <li>
 				               <span>Index</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>
@@ -144,7 +151,9 @@ function viewItems(currObj){
 		});
 }
 function deleteItem(id, currObj){
-	performOperation('delete', id, currObj);
+	if (window.confirm('Remove item?')){
+		performOperation('delete',$('#currentSelector').val(), id, currObj);
+	}
 }
 function editItem(id, currObj){
 	var selector = $('.'+id);
@@ -172,26 +181,29 @@ function cancelEdit(id, currObj){
 	$($(currObj.parent().parent().parent().children()[1]).children()[0]).show();
 	selector.hide();
 }
-function saveChange(currObj){
+function saveChange(currObj, id){
 	var tempObj = currObj;
 	currObj = $(currObj);
 	currObj.parent().hide();
 	currObj.parent().siblings().show();
-	var inputs = currObj.parent().parent().parent().find('input');
+	var inputs = currObj.parent().parent().parent().find('input,select');
 
 	var editVal = {};
+	if(id!==undefined && id!==''){
+		editVal.id = id;
+	}
 	inputs.each(function(index){
 		var element = $(inputs[index]);
 		editVal[element.attr('selectorVal')] = element.val(); 
 	});
-	performOperation('update', JSON.stringify(editVal), tempObj);
+	performOperation('update', $('#currentSelector').val(), JSON.stringify(editVal), tempObj);
 }
 function addProduct(currObj){
 	var tempObj = currObj;
 	currObj = $(currObj);
 	currObj.parent().hide();
 	currObj.parent().siblings().show();
-	var inputs = currObj.parent().parent().parent().find('input');
+	var inputs = currObj.parent().parent().parent().find('input,select');
 
 	var editVal = {};
 	editVal.subCategory = $('#currentSelector').val();
@@ -199,19 +211,19 @@ function addProduct(currObj){
 		var element = $(inputs[index]);
 		editVal[element.attr('selectorVal')] = element.val(); 
 	});
-	performOperation('create', JSON.stringify(editVal), tempObj);
+	performOperation('create', editVal.subCategory, JSON.stringify(editVal), tempObj);
 }
 function addRow(){
-	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="id" type="text"></span></td><td width="15%"><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="name" type="text"></span></td><td><span><input selectorVal="price" type="text"></span></td><td><span><input selectorVal="type" type="text"></span></td><td><span><input selectorVal="orientation" type="text"></span></td><td><span><input selectorVal="color" type="text"></span></td><td><span><input selectorVal="description" type="text"></span></td><td><span><input selectorVal="images" type="text"></span></td><td><span><input selectorVal="isShowCaseItem" type="text"></span></td></tr>');
+	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="id" type="text"></span></td><td width="15%"><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="name" type="text"></span></td><td><span><input selectorVal="price" type="text"></span></td><td><span><select name="type" selectorVal="type"><option value="single">single</option><option value="scroll">scroll</option><option value="book">book</option><option value="laser">laser</option><option value="hand">hand</option></select></span></td><td><span><select name="orientation" selectorVal="orientation"><option value="vertical">vertical</option><option value="horizontal">horizontal</option><option value="square">square</option></select></span></td><td><span><select name="color" selectorVal="color"><option value="black">black</option><option value="white">white</option><option value="red">red</option><option value="blue">blue</option><option value="pink">pink</option><option value="yellow">yellow</option></select></span></td><td><span><input selectorVal="description" type="text"></span></td><td><span><input selectorVal="images" type="text"></span></td><td><span><select name="isShowCaseItem" selectorVal="isShowCaseItem"><option value="true">true</option><option value="false">false</option></select></span></td></tr>');
 }
 function addSliderRow(){
-	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="id" type="text"></span></td><td width="15%"><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="name" type="text"></span></td><td><span><input selectorVal="price" type="text"></span></td><td><span><input selectorVal="type" type="text"></span></td><td><span><input selectorVal="orientation" type="text"></span></td><td><span><input selectorVal="color" type="text"></span></td><td><span><input selectorVal="description" type="text"></span></td></tr>');
+	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="title1" type="text"></span></td><td><span><input selectorVal="title2" type="text"></span></td></tr>');
 }
 function addBlogRow(){
-	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="id" type="text"></span></td><td width="15%"><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="name" type="text"></span></td><td><span><input selectorVal="price" type="text"></span></td><td><span><input selectorVal="type" type="text"></span></td><td><span><input selectorVal="orientation" type="text"></span></td><td><span><input selectorVal="color" type="text"></span></td><td><span><input selectorVal="description" type="text"></span></td></tr>');
+	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="date" type="text"></span></td><td><span><input selectorVal="likeURL" type="text"></span></td><td><span><input selectorVal="postURL" type="text"></span></td><td><span><input selectorVal="title1" type="text"></span></td><td><span><input selectorVal="title2" type="text"></span></td><td><span><input selectorVal="title3" type="text"></span></td></tr>');
 }
-function performOperation(type, param, currObj){
-	$.post("/CMS",{"type":type, "inputData":param})
+function performOperation(type, subCategory,  param, currObj){
+	$.post("/CMS",{"type":type, "subCategory":subCategory, "inputData":param})
 		.done(function(){
 			if(type==="update" || type==="create"){
 				window.location.href=window.location.href.split('?')[0]+"?selector="+$('#currentSelector').val();

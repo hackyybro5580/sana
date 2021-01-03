@@ -31,8 +31,8 @@ public class SanaAction{
 				
 			 if(requestObj==null) {
 			     requestObj = new JSONObject();
-				 requestObj.put("sliderContent", limitShowCaseItems(PropertyUtil.getValue("sliderContent")));
-				 requestObj.put("latestNews", limitShowCaseItems(PropertyUtil.getValue("latestNews")));
+				 requestObj.put("sliderContent", fetchShowCaseItems("sliderContent", 4));
+				 requestObj.put("blogs", fetchShowCaseItems("blogs", 2));
 				 requestObj.put("instaFeed", limitShowCaseItems(PropertyUtil.getValue("instaFeed")));
 				 requestObj.put("showCaseHindu", fetchShowCaseItems("hinduInvitation", 6));
 				 requestObj.put("showCaseMuslim", fetchShowCaseItems("muslimInvitation", 6));
@@ -102,13 +102,16 @@ public class SanaAction{
 		try {
 			String productId = request.getParameter("id");
 			String count = request.getParameter("count");
+			String operation = request.getParameter("operation");
 			Boolean isPresentInCart = Boolean.FALSE;
 			
 			if(productId==null) {
 				return "error";
 			}
 			if(count==null) {
-				count="1";
+				count = "1";
+			}else if(Integer.parseInt(count)<0) {
+				count = "1";
 			}
 			
 			JSONArray cart = new JSONArray();
@@ -124,6 +127,9 @@ public class SanaAction{
 					pCount = Integer.parseInt(item.split("#")[1]);
 					if(pId.equals(productId)) {
 						isPresentInCart = Boolean.TRUE;
+						if(operation!=null && operation.equals("update")) {
+							pCount = 0;
+						}
 						pCount+=Integer.parseInt(count);
 					}
 					items+=pId+"#"+pCount+",";
@@ -368,22 +374,34 @@ public class SanaAction{
 				}
 				
 				//Type validation
-				switch(type) {
-					case "single":
-					case "scroll":
-					case "book":
-					case "laser":
-					case "hand":
-						break;
-					default:
-						type = null;
+				String typeCrit = "";
+				String[] types = type.split("\\$"); 
+				for(int i=0;i<types.length;i++) {
+					boolean isAvailable = true;
+					switch(types[i]) {
+						case "single":
+						case "scroll":
+						case "book":
+						case "laser":
+						case "hand":
+							break;
+						default:
+							isAvailable  = false;
+					}
+					if(isAvailable) {
+						if(typeCrit.length()==0) {
+							typeCrit = "'"+types[i]+"'";
+						}else {
+							typeCrit += ",'"+types[i]+"'";
+						}
+					}
 				}
 				
-				if(type!=null) {
+				if(!typeCrit.equals("")) {
 					if(query.contains("where")) {
-						query +=" and type='"+type+"'";
+						query +=" and type in ("+typeCrit+")";
 					}else {
-						query =" where type='"+type+"'";
+						query =" where type in ("+typeCrit+")";
 					}
 				}
 				
@@ -406,23 +424,34 @@ public class SanaAction{
 				}
 				
 				//Color validation
-				switch(color) {
-					case "black":
-					case "white":
-					case "red":
-					case "blue":
-					case "pink":
-					case "yellow":
-						break;
-					default:
-						color = null;
+				String colorCrit = "";
+				String[] colors = color.split("\\$");
+				for(int i=0;i<colors.length;i++) {
+					boolean isAvailable = true;
+					switch(colors[i]) {
+						case "black":
+						case "white":
+						case "red":
+						case "blue":
+						case "pink":
+						case "yellow":
+							break;
+						default:
+							isAvailable = false;
+					}
+					if(isAvailable) {
+						if(colorCrit.length()==0) {
+							colorCrit = "'"+colors[i]+"'";
+						}else {
+							colorCrit += ",'"+colors[i]+"'";
+						}
+					}
 				}
-				
-				if(color!=null) {
+				if(!colorCrit.equals("")) {
 					if(query.contains("where")) {
-						query += " and color='"+color+"'";
+						query += " and color in ("+colorCrit+")";
 					}else {
-						query = " where color='"+color+"'";
+						query = " where color in ("+colorCrit+")";
 					}
 				}
 				
@@ -491,10 +520,10 @@ public class SanaAction{
 		try {
 			String criteria = "select * from products where IS_SHOW_CASE_ITEM = true and subcategory=\""+subCategory+"\" limit "+limit;
 			String type = null;
-			if(subCategory.equals("latestNews")) {
+			if(subCategory.equals("blogs")) {
 				criteria = "select * from blogs limit "+limit;
 			}else if(subCategory.equals("sliderContent")) {
-				criteria = "select * from slidercontent limit "+limit;
+				criteria = "select * from sliderContent limit "+limit;
 			}else {
 				subCategory = null;
 			}
@@ -533,13 +562,22 @@ public class SanaAction{
 			request.setAttribute("name", prodObj.get("name"));
 			request.setAttribute("price", prodObj.get("price"));
 			request.setAttribute("path", prodObj.get("path"));
-			JSONArray images = prodObj.has("images") && !prodObj.get("images").equals("") ? (JSONArray)prodObj.get("images") : new JSONArray();
+			request.setAttribute("description", prodObj.get("description"));
+			request.setAttribute("imagesAsCommaSeperated", prodObj.get("images"));
+			JSONArray images = new JSONArray();
+			if(prodObj.has("images") && !prodObj.get("images").equals("")) {
+				String[] imagesFromDB = (prodObj.get("images")+"").split(",");
+				for(int i=0;i<imagesFromDB.length;i++) {
+					images.put(imagesFromDB[i]);
+				}
+			}
 			if(images.length()==0) {
 				images.put(prodObj.get("path"));
+				request.setAttribute("imagesAsCommaSeperated", prodObj.get("path"));
 			}
 			request.setAttribute("images", images);
 		}catch(Exception e) {
-			
+			int a = 1;
 		}
 		result = isMobile() ? "mob_"+result : result;
 		return result;
@@ -595,37 +633,91 @@ public class SanaAction{
 		}
 		try {
 			String operation = request.getParameter("type");
+			String subCategory = request.getParameter("subCategory");
 			if(operation!=null) {
-				if(operation.equals("update")) {
-					JSONObject inputData = new JSONObject(request.getParameter("inputData"));
-					String criteria = "update products set path=\""+inputData.get("path")+"\","
-														 +"name=\""+inputData.get("name")+"\","
-														 +"price="+inputData.get("price")+","
-														 +"type=\""+inputData.get("type")+"\","
-														 +"orientation=\""+inputData.get("orientation")+"\","
-														 +"color=\""+inputData.get("color")+"\","
-														 +"description=\""+inputData.get("description")+"\""
-														 +" where id=\""+inputData.get("id")+"\""
-														 ;
-					SQLUtil.executeCriteria(criteria);
-				}else if(operation.equals("create")) {
-					JSONObject inputData = new JSONObject(request.getParameter("inputData"));
-					String criteria = "insert into products values(\""+inputData.get("id")+"\",\""
-															  +inputData.get("name")+"\","
-															  +inputData.get("price")+",\""
-															  +inputData.get("path")+"\",\""
-															  +inputData.get("type")+"\",\""
-															  +inputData.get("subCategory")+"\",\""
-															  +inputData.get("orientation")+"\",\""
-															  +inputData.get("description")+"\",\""
-															  +inputData.get("color")+"\",\""
-															  +inputData.get("images")+"\","
-															  +inputData.get("isShowCaseItem")+")"
-														 ;
-					SQLUtil.executeCriteria(criteria);
-				}else if(operation.equals("delete")) {
-					String criteria = "delete from products where id=\""+request.getParameter("inputData")+"\"";
-					SQLUtil.executeCriteria(criteria);
+				if(subCategory!=null && subCategory.equals("sliderContent")) {
+					if(operation.equals("update")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "update sliderContent set PATH=\""+inputData.get("path")+"\","
+															 +"TITLE1=\""+inputData.get("title1")+"\","
+															 +"TITLE2=\""+inputData.get("title2")+"\""
+															 +" where ID="+inputData.get("id")
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("create")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "insert into sliderContent(PATH, TITLE1, TITLE2) values(\""+inputData.get("path")+"\",\""
+																  +inputData.get("title1")+"\",\""
+																  +inputData.get("title2")+"\")"
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("delete")) {
+						String criteria = "delete from sliderContent where id="+request.getParameter("inputData");
+						SQLUtil.executeCriteria(criteria);
+					}
+				}else if(subCategory!=null && subCategory.equals("blogs")){
+					if(operation.equals("update")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "update blogs set DATE=\""+inputData.get("date")+"\","
+															 +"LIKE_URL=\""+inputData.get("likeURL")+"\","
+															 +"PATH=\""+inputData.get("path")+"\","
+															 +"TITLE1=\""+inputData.get("title1")+"\","
+															 +"TITLE2=\""+inputData.get("title2")+"\","
+															 +"TITLE3=\""+inputData.get("title3")+"\","
+															 +"POST_URL=\""+inputData.get("postURL")+"\""
+															 +" where ID="+inputData.get("id")
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("create")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "insert into blogs(DATE, LIKE_URL, POST_URL, PATH, TITLE1, TITLE2, TITLE3) values(\""+inputData.get("date")+"\",\""
+																  +inputData.get("likeURL")+"\",\""
+																  +inputData.get("postURL")+"\",\""
+																  +inputData.get("path")+"\",\""
+																  +inputData.get("title1")+"\",\""
+																  +inputData.get("title2")+"\",\""
+																  +inputData.get("title3")+"\")"
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("delete")) {
+						String criteria = "delete from blogs where id="+request.getParameter("inputData");
+						SQLUtil.executeCriteria(criteria);
+					}
+				}
+				else {
+					if(operation.equals("update")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "update products set path=\""+inputData.get("path")+"\","
+															 +"name=\""+inputData.get("name")+"\","
+															 +"price="+inputData.get("price")+","
+															 +"type=\""+inputData.get("type")+"\","
+															 +"orientation=\""+inputData.get("orientation")+"\","
+															 +"color=\""+inputData.get("color")+"\","
+															 +"description=\""+inputData.get("description")+"\","
+															 +"images=\""+inputData.get("images")+"\","
+															 +"IS_SHOW_CASE_ITEM="+inputData.get("isShowCaseItem")
+															 +" where id=\""+inputData.get("id")+"\""
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("create")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "insert into products values(\""+inputData.get("id")+"\",\""
+																  +inputData.get("name")+"\","
+																  +inputData.get("price")+",\""
+																  +inputData.get("path")+"\",\""
+																  +inputData.get("type")+"\",\""
+																  +inputData.get("subCategory")+"\",\""
+																  +inputData.get("orientation")+"\",\""
+																  +inputData.get("description")+"\",\""
+																  +inputData.get("color")+"\",\""
+																  +inputData.get("images")+"\","
+																  +inputData.get("isShowCaseItem")+")"
+															 ;
+						SQLUtil.executeCriteria(criteria);
+					}else if(operation.equals("delete")) {
+						String criteria = "delete from products where id=\""+request.getParameter("inputData")+"\"";
+						SQLUtil.executeCriteria(criteria);
+					}
 				}
 			}
 		}catch(Exception e) {
@@ -703,6 +795,13 @@ public class SanaAction{
 				pw.close();
 			}
 		}
+	}
+	
+	public String aboutUS() {
+		execute();
+		String result = "success";
+		result = isMobile() ? "mob_"+result : result;
+		return result;
 	}
  }
 

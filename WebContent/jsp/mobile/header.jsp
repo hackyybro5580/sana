@@ -369,7 +369,7 @@ article {
                    <%}%>
                    <li class="single-cart-item clearfix">
                     <span class="sub-total-cart text-center">
-                     <div style="margin-top: 20px;padding: 100px;font-size:90px;opacity:0.7;">
+                     <div style="margin-top: 20px;padding: 100px;font-size:60px;opacity:0.7;">
                      	<span style="float:left;">Subtotal</span>
                      	<span style="float:right;"><i class="fa fa-rupee" style="font-size:65px;padding-right:20px;"></i> <%=Math.round(total*100.0)/100.0%></span>
                      </div>

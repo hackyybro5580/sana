@@ -151,11 +151,11 @@ body {
                          <div class="section-title">
                              <h4>Type</h4>
                              <ul class="submenu" style="display: contents;">
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
-                             	<li><a onclick="setSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
+                             	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#single" id="single">Single sheet Cards</a></li>
+                             	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#scroll" id="scroll">Scroll Type Cards</a></li>
+                             	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#book" id="book">Book Type Cards</a></li>
+                             	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#laser" id="laser">Laser Cut Cards</a></li>
+                             	<li><a onclick="setMultipleSubCategoryAndFetch(this);" value="type#hand" id="hand">Hand-made Cards</a></li>
                              </ul>
                          </div>
                      </div>
@@ -187,12 +187,12 @@ body {
                         <div class="section-title">
                             <h4>filter by color</h4>
                             <ul class="color-widget">
-                                <li class="active"><span class="black"></span><a onclick="setSubCategoryAndFetch(this);" value="color#black">black</a></li>
-                                <li><span class="white"></span><a onclick="setSubCategoryAndFetch(this);" value="color#white">white</a></li>
-                                <li><span class="red"></span><a onclick="setSubCategoryAndFetch(this);" value="color#red">red</a></li>
-                                <li><span class="blue"></span><a onclick="setSubCategoryAndFetch(this);" value="color#blue">blue</a></li>
-                                <li><span class="pink"></span><a onclick="setSubCategoryAndFetch(this);" value="color#pink">pink</a></li>
-                                <li><span class="yellow"></span><a onclick="setSubCategoryAndFetch(this);" value="color#yellow">yellow</a></li>
+                                <li class="active"><span class="black"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#black" style="width: 100%;text-align: inherit;">black</a></li>
+                                <li><span class="white"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#white" style="width: 100%;text-align: inherit;">white</a></li>
+                                <li><span class="red"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#red" style="width: 100%;text-align: inherit;">red</a></li>
+                                <li><span class="blue"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#blue" style="width: 100%;text-align: inherit;">blue</a></li>
+                                <li><span class="pink"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#pink" style="width: 100%;text-align: inherit;">pink</a></li>
+                                <li><span class="yellow"></span><a onclick="setMultipleSubCategoryAndFetch(this);" value="color#yellow" style="width: 100%;text-align: inherit;">yellow</a></li>
                             </ul>
                         </div>
                     </div>

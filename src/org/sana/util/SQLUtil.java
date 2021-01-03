@@ -55,11 +55,11 @@ public class SQLUtil {
 //			smt.executeUpdate("create table products(ID varchar(50) NOT NULL UNIQUE, NAME varchar(50), PRICE FLOAT, PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25))");
 			smt.executeUpdate("create table products(ID varchar(50), NAME varchar(50), PRICE FLOAT, PATH text, TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION varchar(15), DESCRIPTION text, COLOR varchar(25), IMAGES text, IS_SHOW_CASE_ITEM BOOLEAN DEFAULT FALSE)");
 			
-			smt.executeUpdate("create table sliderContent(PATH text, TITLE1 text, TITLE2 text)");
+			smt.executeUpdate("create table sliderContent(ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PATH text, TITLE1 text, TITLE2 text)");
 			
-			smt.executeUpdate("create table blogs(DATE text,LIKE_URL text, POST_URL text, PATH text, TITLE1 text, TITLE2 text, TITLE3 text)");
+			smt.executeUpdate("create table blogs(ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, DATE text,LIKE_URL text, POST_URL text, PATH text, TITLE1 text, TITLE2 text, TITLE3 text)");
 			
-			//Insert into DB from propertyFile starts
+//			Insert into DB from propertyFile starts
 //			String insertquery = "insert into products values(";
 //			String[] productsArray = DefaultValues.productArray;
 //			
@@ -77,11 +77,11 @@ public class SQLUtil {
 		catch(SQLException e) {
 			String message = e.getMessage();
 			if(message!=null && message.endsWith("already exists")) {
-				con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
-				//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+				//con = DriverManager.getConnection("jdbc:mysql://aa1gtctnsfsrp6b.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+//				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 //				Statement smt = con.createStatement();
 //				smt.executeUpdate("drop table products");
-//				result = Boolean.FALSE;
+				result = Boolean.FALSE;
 			}
 		}
 		catch(Exception e1) {
@@ -119,15 +119,17 @@ public class SQLUtil {
 					obj.put("color", rs.getString(PRODUCTS.COLOR));
 					obj.put("images", rs.getString(PRODUCTS.IMAGES));
 					obj.put("isShowCaseItem", rs.getString(PRODUCTS.IS_SHOW_CASE_ITEM));
-				}else if(type.equals("latestNews")) {
+				}else if(type.equals("blogs")) {
+					obj.put("id", rs.getString(PRODUCTS.ID));
 					obj.put("date", rs.getString("date"));
-					obj.put("likeURL", rs.getString("likeURL"));
+					obj.put("likeURL", rs.getString("LIKE_URL"));
 					obj.put("path", rs.getString("path"));
-					obj.put("postURL", rs.getString("postURL"));
+					obj.put("postURL", rs.getString("POST_URL"));
 					obj.put("title1", rs.getString("title1"));
 					obj.put("title2", rs.getString("title2"));
 					obj.put("title3", rs.getString("title3"));
 				}else if(type.equals("sliderContent")) {
+					obj.put("id", rs.getString("id"));
 					obj.put("path", rs.getString("path"));
 					obj.put("title1", rs.getString("title1"));
 					obj.put("title2", rs.getString("title2"));

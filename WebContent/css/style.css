@@ -168,11 +168,11 @@ li.single-cart-item a.trash i {
     position: absolute;
     text-align: left;
     top: 61px;
-    transform: rotateX(90deg);
-    transform-origin: center top 0;
-    transition: all 0.6s ease 0s;
+/*     transform: rotateX(90deg); */
+/*     transform-origin: center top 0; */
+/*     transition: all 0.6s ease 0s; */
     visibility: hidden;
-    width: 200px;
+    width: 220px;
     z-index: -99;
     border: 1px solid #ADADAD;
     font-weight: 500;
@@ -191,7 +191,7 @@ li.single-cart-item a.trash i {
 }
 .mainmenu ul li ul.submenu-mainmenu{
     padding: 12px 0;
-    top: 70px;
+    top: 66px;
 }
 .mainmenu ul > li > ul.submenu-mainmenu > li {
     display: block;
@@ -530,10 +530,10 @@ span.cart-info a:hover{
     position: absolute;
     right: auto;
     text-align: left;
-    top: 70px!important;
-    transform: rotateX(90deg);
-    transform-origin: center top 0;
-    transition: all 0.6s ease 0s;
+    top: 66px!important;
+/*     transform: rotateX(90deg); */
+/*     transform-origin: center top 0; */
+/*     transition: all 0.6s ease 0s; */
     visibility: hidden;
     width: 700px;
     z-index: -99;
@@ -543,7 +543,7 @@ span.cart-info a:hover{
     opacity: 1;
     visibility: visible;
     z-index: 999;
-    transform: rotateX(0deg);
+/*     transform: rotateX(0deg); */
 }
 .mainmenu ul li .mega-menu span {
     width: 31%;
@@ -567,7 +567,7 @@ span.cart-info a:hover{
     left: auto;
 }
 .mainmenu ul li:hover ul.submenu-mainmenu {
-    transform: rotateX(0deg);
+/*     transform: rotateX(0deg); */
     visibility: visible;
     z-index: 99999;
 }
@@ -1966,7 +1966,7 @@ ul.social-icon li i:hover{
 .single-left-widget .section-title ul ul li a {
   text-transform: initial;
 }
-.single-left-widget .section-title ul > li:hover > a, .single-left-widget .section-title ul li ul li a:hover, .single-left-widget .section-title ul li:hover a i, .single-left-widget .section-title ul li.active a, .single-left-widget .section-title ul li.active a i{
+.single-left-widget .section-title ul li ul li a:hover, .single-left-widget .section-title ul li:hover a i, .single-left-widget .section-title ul li.active a, .single-left-widget .section-title ul li.active a i{
     color: #F05166;
 }
 .single-left-widget .section-title ul li{
@@ -4290,4 +4290,25 @@ hr {
 }
 .posAbs{
 	position: absolute;	
+}
+.p10{
+	padding: 10px;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.mT4{
+	margin-top: 4px;
+}
+.noBorder{
+	border: 0 !important;
+}
+.fR{
+	float: right;
 }

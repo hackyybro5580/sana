@@ -338,10 +338,10 @@ body {
                          	<%}else{%>
 	                         <div class="row">
 	                         	<table style="width: 100%;">
-	                         		<%for(int i=0;i<=products.length();i+=2){%>
+	                         		<%for(int i=0, y=0;i<=products.length();i+=2){%>
 	                         		  <tr>
 	                         		  	<% int z = (i%2==0 && i>=2) ? 2 : i<2 ? i : i/2;
-	                         		  	for(int j=0;j<z;j++){JSONObject obj = products.getJSONObject(j);%>
+	                         		  	for(int j=0;j<z;j++){JSONObject obj = products.getJSONObject(y++);%>
 	                         		  	<td>
 			                             <div class="col-md-4 col-sm-4 col-xs-12" style="width:260px;">
 			                                 <div class="single-product">

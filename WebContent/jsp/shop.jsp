@@ -112,7 +112,7 @@ body {
  <div class="shop-grid-leftsidebar-area">
      <div class="container">   
          <div class="row">
-             <div class="col-md-3 col-sm-12 col-xs-12">
+             <div class="col-md-3 col-sm-12 col-xs-12" style="width:330px !important">
                  <div class="shop-left-sidebar">
                      <div class="single-left-widget">
                          <div class="section-title">
@@ -198,7 +198,7 @@ body {
                     </div>
                  </div>
              </div>   
-             <div class="col-md-9 col-sm-12 col-xs-12">   
+             <div class="col-md-9 col-sm-12 col-xs-12" style="width:1026px !important">   
                  <div class="shop-item-filter">
                      <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
                          <div class="shop-tab clearfix">
@@ -239,7 +239,7 @@ body {
                  </div>
                  <div class="clearfix"></div>
                  <div id="productsListAndPagination">             
-                 <div id="productsList" style="min-height:990px; !important">
+                 <div id="productsList" style="min-height:1070px; !important">
 	                 <div class="tab-content">
 	                     <div id="grid" class="tab-pane active" style="min-height:990px;" role="tabpanel">
 		                     <%if(totProducts==0){%>
@@ -289,8 +289,7 @@ body {
 	            <div class="row">
 	                 <div class="col-xs-12" style="width:1026px">   
 	                     <div class="shop-item-filter bottom">
-	                     <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs"></div>
-	                         <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs" style="width:100%">
+	                         <div style="width:100%">
 								<div id="pagination-container" class="light-theme simple-pagination"></div> 
 	                         </div>    
 	                     </div>

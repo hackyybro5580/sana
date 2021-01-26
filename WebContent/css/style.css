@@ -1812,8 +1812,8 @@ ul.social-icon li i:hover{
     width: 100%;
 }
 .shop-item-filter.bottom{
-    margin-bottom: 100px;
-    margin-top: 30px;
+    margin-bottom: 20px !important;
+    margin-top: 30px !important;
 }
 .shop-tab {margin-bottom: 0}
 .filter-text {display: inline-block}
@@ -3331,10 +3331,11 @@ td.product_des h3 a:hover{
     padding: 28px 30px;
 }
 .total {
-    margin-left: 25px;
-    padding-bottom: 31px;
-    text-align: right;
-    width: 325px;
+	float: right !important;
+    margin-left: 0 !important;
+    padding-bottom: 31px !important;
+    text-align: right !important;
+    width: 325px !important;
 }
 .cart-info{
     margin-top: 30px;

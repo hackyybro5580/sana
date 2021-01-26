@@ -563,10 +563,10 @@ public class SanaAction{
 			request.setAttribute("price", prodObj.get("price"));
 			request.setAttribute("path", prodObj.get("path"));
 			request.setAttribute("description", prodObj.get("description"));
-			request.setAttribute("imagesAsCommaSeperated", prodObj.get("images"));
+			request.setAttribute("imagesAsCommaSeperated", prodObj.get("path")+","+prodObj.get("images"));
 			JSONArray images = new JSONArray();
 			if(prodObj.has("images") && !prodObj.get("images").equals("")) {
-				String[] imagesFromDB = (prodObj.get("images")+"").split(",");
+				String[] imagesFromDB = (prodObj.get("path")+","+prodObj.get("images")).split(",");
 				for(int i=0;i<imagesFromDB.length;i++) {
 					images.put(imagesFromDB[i]);
 				}

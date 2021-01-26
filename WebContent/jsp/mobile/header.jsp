@@ -393,6 +393,7 @@ article {
 
 <script>
 scale = .5;
+width = 0;
 $(function () {
   let sidebar = $('.sidebar'),
     allDropdown = $('.sidebar-dropdown'),

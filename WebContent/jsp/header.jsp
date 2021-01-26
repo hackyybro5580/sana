@@ -43,6 +43,9 @@ if(request.getAttribute("cart")!=null){
   -o-transition: none !important;
   transition: none !important;
 }
+.container{
+	width: 1370px !important;
+}
 .active {
     color: #F05166 !important;
 }
@@ -53,11 +56,11 @@ html, body {
 	min-width:1440px !important; 
 }
 </style>
-<header class="header-area" >
+<header class="header-area" style="max-height:62px !important;" >
     <div class="header-top-area">
         <div class="container" style="width:1370px !important;">
             <div class="row">
-                <div class="col-md-6 col-sm-6 hidden-xs">
+                <div class="col-md-6 col-sm-6">
                     <div class="header-top-left">
                         <div class="notification-header">
                             <ul>
@@ -66,7 +69,7 @@ html, body {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6">
                     <div class="header-top-right">
                         <div class="order-cart">
                             <ul>
@@ -121,7 +124,7 @@ html, body {
     	</div>
         <div class="row">
             <div>
-                <div class="mainmenu">
+                <div class="mainmenu" style="display:block;">
                     <nav>
                         <ul>
                             <li><a href="/homepage">Home</a></li>

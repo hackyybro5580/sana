@@ -74,7 +74,7 @@
 .modal-content {
   margin: auto;
   display: block;
-  width: 50%;
+  width: 100%;
   z-index: 999;
 }
 
@@ -255,10 +255,10 @@ JSONArray images = (JSONArray)request.getAttribute("images");
 <input type="hidden" id="imgIndex" value="0"/>
 <div id="myModal" class="modal" style="display: none;">
 	<i class="fa fa-times" style="color: white;float: right;padding: 100px;font-size: 100px !important;" onclick="hideModal();"></i>
-	<div style="margin-top: 40%;display: flex;">
-		<i onclick="prevImg();" class="fa fa-angle-left" style="color:white;margin-top:20%;padding:10%;font-size:150px !important"></i>
+	<div style="margin-top: 25%;display: flex;">
+		<i onclick="prevImg();" class="fa fa-angle-left" style="color:white;margin-top:35%;padding:4%;font-size:150px !important"></i>
   		<img class="modal-content" id="img01">
-  		<i onclick="nextImg();" class="fa fa-angle-right" style="color:white;margin-top:20%;padding:10%;font-size:150px !important"></i>
+  		<i onclick="nextImg();" class="fa fa-angle-right" style="color:white;margin-top:35%;padding:4%;font-size:150px !important"></i>
   	</div>
 </div> 
 </div>

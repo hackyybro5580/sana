@@ -4201,7 +4201,7 @@ input.input-text, select, textarea {
 
 html {
     overflow: scroll;
-    overflow-x: hidden;
+	overflow-x: overlay;
 }
 ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
@@ -4260,7 +4260,7 @@ hr {
 .proceedToEnquireClass{
 	background: #F4F4F4;
     width: 500px;
-    height: 315px;
+    height: 324px;
     padding: 26px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);

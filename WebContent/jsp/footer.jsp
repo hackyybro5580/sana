@@ -12,9 +12,9 @@
 </style>
 <footer class="footer-area">
 	<div class="footer-middle-area">
-		<div class="container">
+		<div class="container" style="height:170px;">
 			<div class="row">
-				<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+				<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12" style="width: 320px;">
 					<div class="footer-widget">
 						<div class="footer-logo">
 							<img src="img/logo/footer-logo.png" style="margin-top: -7px;"
@@ -33,7 +33,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-2 col-sm-3 col-xs-12">
+				<div class="col-lg-3 col-md-2 col-sm-3 col-xs-12" style="width: 320px;">
 					<div class="footer-widget">
 						<h5>Services</h5>
 						<ul>
@@ -41,12 +41,11 @@
 							<li><a href="/aboutus#contactUs">Contact Us</a></li>
 							<li><a href="/aboutus#paymentTerms">Payment Terms</a></li>
 							<li><a href="/aboutus#returnsPolicy">Return Policy</a></li>
-							<li class="hidden-sm"><a href="/aboutus#termsAndconditions">Terms
-									&amp; Condition</a></li>
+							<li><a href="/aboutus#termsAndconditions">Terms &amp; Condition</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-2 hidden-sm col-xs-12">
+				<div class="col-lg-3 col-md-2 col-xs-12" style="width: 320px;">
 					<div class="footer-widget">
 						<h5>Order</h5>
 						<ul>
@@ -54,7 +53,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" style="width: 320px;">
 					<div class="footer-widget">
 						<h5>Get Social</h5>
 						<p>

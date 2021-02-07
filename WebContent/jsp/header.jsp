@@ -60,7 +60,7 @@ html, body {
     <div class="header-top-area">
         <div class="container" style="width:1370px !important;">
             <div class="row">
-                <div class="col-md-6 col-sm-6">
+                <div style="width: 400px;float: left;">
                     <div class="header-top-left">
                         <div class="notification-header">
                             <ul>
@@ -69,7 +69,7 @@ html, body {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div style="float: right;width: 255px;">
                     <div class="header-top-right">
                         <div class="order-cart">
                             <ul>

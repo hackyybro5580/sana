@@ -108,7 +108,7 @@ function proceedToEnquire(){
 			if(data=="success"){
 				$('.left_comment, .section-heading, .fa.fa-close').hide();
 				$('.orderSuccess').show();
-				$('.proceedToEnquireClass').css('height', '800px');
+//				$('.proceedToEnquireClass').css('height', '800px');
 			}else{
 				closePopup();
 				myAlert('danger', 'Error occurred while placing your order', 'Please try again or contact us.');

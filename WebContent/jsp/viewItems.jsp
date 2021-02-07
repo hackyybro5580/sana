@@ -20,11 +20,11 @@
 	<%if(productsArray.length()>0){%>
 		<%for(int i=0;i<productsArray.length();i++){JSONObject obj = productsArray.getJSONObject(i);%>
 			<tr>
-				<td>
+				<td class="noBR">
 					<span class="default"><i onclick="deleteItem('<%=obj.get("id")%>', this);" class="fa fa-trash"></i></span>
 					<span class="edit"> <i onclick="saveChange(this);" class="fa fa-check"></i></span>
 				</td>
-				<td>
+				<td class="noBL">
 					<span class="default"><i onclick="editItem('<%=obj.get("id")%>', this);" class="fa fa-pencil-square-o"></i></span>
 					<span class="edit"> <i onclick="cancelEdit('<%=obj.get("id")%>', this);" class="fa fa-times"></i></span>
 				</td>

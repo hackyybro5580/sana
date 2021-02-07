@@ -390,19 +390,19 @@ td div{
 		                         <div class="blogContent">
 		                             <div class="single-latest-blog-img">
 		                                 <a href="blog-details.html">
-		                                     <img class="dim" src="<%=obj.get("path")%>" alt="">
+		                                     <img class="dim" src="<%=obj.get("path")%>" style="width: 100%;" alt="">
 		                                 </a>
 		                             </div>
 		                             <div class="single-latest-blog-text">
-		                                 <div class="date-comment clearfix">
+		                                 <div class="date-comment clearfix" style="padding: 0px 30px;">
 		                                     <h4><%=obj.get("title1")%></h4>
-		                                     <h5><%=obj.get("date")%></h5>   
+		                                     <h5 style="float: right;"><%=obj.get("date")%></h5>   
 		                                 </div>
-		                                 <div class="blog-content">
+		                                 <div class="blog-content" style="padding: 0px 30px;">
 		                                     <h4><a href="<%=obj.get("postURL")%>"><%=obj.get("title2")%></a></h4>
 		                                     <p><%=obj.get("title3")%></p>   
 		                                 </div>
-		                                 <div class="continue-reading">
+		                                 <div class="continue-reading" style="padding: 0px 30px;">
 		                                     <a href="blog-details.html">Continue Reading.</a>
 		                                     <div class="blog-icon">
 		                                         <ul>

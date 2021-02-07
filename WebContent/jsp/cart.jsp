@@ -51,8 +51,8 @@ function updateValue(operation, id){
      <div class="container">          
          <div class="row">
              <div class="col-xs-12">   
-                 <div class="cart_list table-responsive">
-                     <table class="table_cart table-bordered">
+                 <div class="cart_list table-responsive" style="margin-bottom: 0;border: 0;">
+                     <table class="table_cart table-bordered" style="border: 1px solid #dddddd;">
                          <thead>
                              <tr>
                                  <th class="id">#</th>
@@ -95,12 +95,12 @@ function updateValue(operation, id){
              </div>
          </div>
          <div class="row">
-             <div class="col-lg-5 col-md-4 col-sm-12">           
-                 <a href="/homepage" class="continue-shopping">continue shopping</a>
+             <div class="col-lg-5 col-md-4 col-sm-12" style="width: 235px;float: left;">           
+                 <a href="/homepage" class="continue-shopping" style="margin: 0;">continue shopping</a>
              </div>   
              <%if(cart.length()>0){%> 
-             <div class="col-lg-7 col-md-8 col-sm-12">      
-                 <div class="total text-right">
+             <div class="col-lg-7 col-md-8 col-sm-12" style="float:right;width: 330px;">      
+                 <div class="total text-right" style="padding: 28px 30px;margin-top: 0;">
                      <h2>subtotal <span>Rs. <%=Math.round(total*100.0)/100.0%></span></h2>
                      <h2 class="strong">grandtotal <span>Rs. <%=Math.round(total*100.0)/100.0%></span></h2>
                      <a class="continue-shopping" id="go" rel="leanModal" onclick="showPopup();">Proceed to Enquire</a>

@@ -10,6 +10,34 @@
 <script src="js/bootstrap-notify.min.js"></script>
 <script src="/js/crypto-js.js"></script>
 <style>
+table{
+	border-collapse: collapse;
+}
+#productsTable tr:hover, a:hover{
+	color:#decec2;
+}
+i{
+	color: black !important;
+}
+.bb{
+    border-bottom: 1px solid;
+    padding-bottom: 30px;
+}
+
+#productsTable th {
+    background-color: #decec2;
+    color: #ffffff;
+}
+
+#productsTable tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#productsTable tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+
 .limitText{
 	display:block;
 	text-overflow: ellipsis;
@@ -54,7 +82,7 @@ a:hover, i:hover, button:hover{
 				   <nav>
 				      <div>
 				         <ul>
-				            <li>
+				            <li class="bb">
 				               <span>Index</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>
@@ -64,7 +92,7 @@ a:hover, i:hover, button:hover{
 				                  </ul>
 				               </div>
 				            </li>
-				            <li>
+				            <li class="bb">
 				               <span>Wedding</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>
@@ -75,7 +103,7 @@ a:hover, i:hover, button:hover{
 				                  </ul>
 				               </div>
 				            </li>
-				            <li>
+				            <li class="bb">
 				               <span class="menu-text">Type</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>
@@ -88,7 +116,7 @@ a:hover, i:hover, button:hover{
 				                  </ul>
 				               </div>
 				            </li>
-				            <li>
+				            <li class="bb">
 				               <span>Occasional</span>
 				               <i style="font-size: 50px;"></i>
 				               <div class="sidebar-submenu">
@@ -103,7 +131,7 @@ a:hover, i:hover, button:hover{
 				                  </ul>
 				               </div>
 				            </li>
-				            <li>
+				            <li class="bb">
 				               <span>Add Ons</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>
@@ -114,7 +142,7 @@ a:hover, i:hover, button:hover{
 				                  </ul>
 				               </div>
 				            </li>
-				            <li style="display:none">
+				            <li class="bb" style="display:none">
 				               <span>Our Story</span>
 				               <i style="font-size: 50px;"></i>
 				               <div>

@@ -182,7 +182,7 @@
         .mobile-menu-area, .search-box, .blog-sidebar .post-info > span, #quantity-wanted-p{display:block}
         .mainmenu, .owl-theme .owl-controls .owl-buttons div, .slider-content h1.title, .home-two .timer, .zoomLens,.zoomContainer{display: none}
         .language-usd > ul > li a, .account-cart > ul > li a {padding: 20px}
-        .logo {padding: 20px 0; text-align: center}
+        .logo {text-align: center}
         .cart_list thead th { padding: 15px 55px;}
         .big-one .timer-banner-text {right: 7%;top: 35%}
         .product-details-area.left-sidebar .product-description-tab {padding: 40px 15px 30px}

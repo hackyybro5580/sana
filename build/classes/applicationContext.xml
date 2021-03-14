@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aspectj>
+	<aspects>
+        <aspect name="org.sana.core.SanaAction" />
+	</aspects>
+	<weaver>
+		<include within="org.sana.core.SanaAction" />
+	</weaver>
+</aspectj>

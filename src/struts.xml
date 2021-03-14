@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="sana" extends="struts-default, tiles-default" namespace="/">
+        <action name="homepage" class="org.sana.core.SanaAction">
+            <result name="success" type="tiles">homepage</result>
+            <result name="mob_success" type="tiles">mob_homepage</result>
+            <result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="addToCart" class="org.sana.core.SanaAction" method="addToCart">
+        	<result name="success">/jsp/header.jsp</result>
+        	<result name="mob_success">/jsp/mobile/header.jsp</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="removeFromCart" class="org.sana.core.SanaAction" method="removeFromCart">
+        	<result name="success">/jsp/header.jsp</result>
+        	<result name="mob_success">/jsp/mobile/header.jsp</result>
+        	<result name="showCartPage" type="tiles">CartPage</result>
+        	<result name="mob_showCartPage" type="tiles">mob_CartPage</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="cart" class="org.sana.core.SanaAction" method="cart">
+        	<result name="success" type="tiles">CartPage</result>
+        	<result name="mob_success" type="tiles">mob_CartPage</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="proceedToEnquire" class="org.sana.core.SanaAction" method="proceedToEnquire"/>
+        <action name="initDB" class="org.sana.core.SanaAction" method="initDB"/>
+        <action name="aboutus" class="org.sana.core.SanaAction" method="aboutUS">
+        	<result name="success" type="tiles">AboutUs</result>
+        	<result name="mob_success" type="tiles">mob_AboutUs</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="contactus">
+        	<result type="tiles">ContactUs</result>
+        	<result type="tiles">mob_ContactUs</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="shop" class="org.sana.core.SanaAction" method="shop">
+        	<result name="success" type="tiles">Shop</result>
+        	<result name="mob_success" type="tiles">mob_Shop</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="productDescription" class="org.sana.core.SanaAction" method="productDescription">
+        	<result name="success" type="tiles">ProductDescription</result>
+        	<result name="mob_success" type="tiles">mob_ProductDescription</result>
+        	<result name="error">error</result>
+        	<result name="mob_error">mob_error</result>
+        </action>
+        <action name="CMS" class="org.sana.core.SanaAction" method="CMS">
+        	<result name="success">jsp/CMS.jsp</result>
+        	<result name="error">jsp/admin.jsp</result>
+        	<result name="login">jsp/admin.jsp</result>
+        </action>
+        <action name="viewItems" class="org.sana.core.SanaAction" method="viewItems">
+        	<result name="success">jsp/viewItems.jsp</result>
+        	<result name="blogs">jsp/blogs.jsp</result>
+        	<result name="sliderContent">jsp/sliderContent.jsp</result>
+        	<result name="error">jsp/admin.jsp</result>
+        	<result name="login">jsp/admin.jsp</result>
+        </action>
+        <action name="*">
+    		<result type="redirect">/homepage</result>
+		</action>
+    </package>
+</struts>

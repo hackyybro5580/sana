@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+  
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">   
+  
+<tiles-definitions>  
+    <definition name="baseLayout" template="jsp/baseLayout.jsp">
+        <put-attribute name="title" value="SANA" />
+        <put-attribute name="header" value="/jsp/header.jsp" />
+        <put-attribute name="body" value="/jsp/index.jsp" />
+        <put-attribute name="footer" value="/jsp/footer.jsp" />
+    </definition>
+	<definition name="homepage" extends="baseLayout"> 
+	</definition>
+	<definition name="CartPage" extends="baseLayout">
+		<put-attribute name="body" value="/jsp/cart.jsp" /> 
+	</definition>
+	<definition name="AboutUs" extends="baseLayout">
+		<put-attribute name="body" value="/jsp/about-us.jsp" /> 
+	</definition>
+	<definition name="ContactUs" extends="baseLayout">
+		<put-attribute name="body" value="/jsp/contact.jsp" /> 
+	</definition>
+	<definition name="Shop" extends="baseLayout">
+		<put-attribute name="body" value="/jsp/shop.jsp" /> 
+	</definition>
+	<definition name="ProductDescription" extends="baseLayout">
+		<put-attribute name="body" value="/jsp/productDescription.jsp" /> 
+	</definition>
+	
+	<!-- Mobile Pages -->
+    <definition name="mob_BaseLayout" template="jsp/mobile/baseLayout.jsp">
+        <put-attribute name="title" value="SANA" />
+        <put-attribute name="header" value="/jsp/mobile/header.jsp" />
+        <put-attribute name="body" value="/jsp/mobile/index.jsp" />
+        <put-attribute name="footer" value="/jsp/mobile/footer.jsp" />
+    </definition>
+	<definition name="mob_homepage" extends="mob_BaseLayout"> 
+	</definition>
+	<definition name="mob_CartPage" extends="mob_BaseLayout">
+		<put-attribute name="body" value="/jsp/mobile/cart.jsp" /> 
+	</definition>
+	<definition name="mob_AboutUs" extends="mob_BaseLayout">
+		<put-attribute name="body" value="/jsp/mobile/about-us.jsp" /> 
+	</definition>
+	<definition name="mob_ContactUs" extends="mob_BaseLayout">
+		<put-attribute name="body" value="/jsp/mobile/contact.jsp" /> 
+	</definition>
+	<definition name="mob_Shop" extends="mob_BaseLayout">
+		<put-attribute name="body" value="/jsp/mobile/shop.jsp" /> 
+	</definition>
+	<definition name="mob_ProductDescription" extends="mob_BaseLayout">
+		<put-attribute name="body" value="/jsp/mobile/productDescription.jsp" /> 
+	</definition>
+</tiles-definitions>  

@@ -21,15 +21,10 @@
 								alt="">
 						</div>
 						<div class="footer-address">
-							<p>
-								Membalam Rd, Balaganapathy Nagar,<br>Thanjavur, Tamil Nadu
-								613007
-							</p>
-
-							<p>
-								Phone: <a href="tel:+911122334455">+91 1122334455</a><br>
-								Email: <a href="mailto:hello@sanacards.com">hello@sanacards.com</a>
-							</p>
+							<p style="margin-bottom: 15px;">No.17, Malligaipuram, Srinivasapuram</p>
+                            <p>Thanjavur - 613009</p>
+                            <p>Phone: <a href="tel:+919043257800,">+91 9043257800</a>, <a href="tel:+919944235790,">+91 9944235790</a></p>
+                            <p>Email: <a href="mailto:sanacards2020@gmail.com">sanacards2020@gmail.com</a></p>
 						</div>
 					</div>
 				</div>
@@ -61,9 +56,8 @@
 							on new trends and designs.
 						</p>
 						<ul class="social-icon">
-							<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="www.instagram.com"><i
+							<li><a href="https://www.facebook.com/sana.cards/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="https://www.instagram.com/sanacards2020/" target="_blank"><i
 									class="fa fa-instagram"></i></a></li>
 						</ul>
 					</div>
@@ -78,7 +72,7 @@
 					<div class="copyright">
 						<p>
 							2020 &copy; All Rights Reserved <span><a
-								href="http://sanacards.in/">Sana Cards</a></span>.
+								href="http://sanacards.com/">Sana Cards</a></span>.
 						</p>
 					</div>
 				</div>

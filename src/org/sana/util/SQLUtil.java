@@ -21,7 +21,7 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana?characterEncoding=utf8", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			result = Boolean.TRUE;
@@ -30,7 +30,7 @@ public class SQLUtil {
 			String message = e1.getMessage();
 			if (message != null && message.startsWith("Unknown database")) {
 				try {
-					con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306?characterEncoding=utf8", "root", "sanacards#2020#");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
 					//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
 					Statement smt = con.createStatement();
 					smt.executeUpdate("create database sana");
@@ -53,7 +53,7 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			// smt.executeUpdate("create table products(ID varchar(50) NOT NULL UNIQUE, NAME varchar(50), PRICE FLOAT, PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION
@@ -83,7 +83,7 @@ public class SQLUtil {
 			LOGGER.log(Level.SEVERE, "SQLException in loadTable method!", e);
 			String message = e.getMessage();
 			if (message != null && message.endsWith("already exists")) {
-				// con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana","root","sanacards#2020#");
+				// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","SanaDB#2020#Admin");
 				// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 				// Statement smt = con.createStatement();
 				// smt.executeUpdate("drop table products");
@@ -104,7 +104,7 @@ public class SQLUtil {
 		JSONArray responseArray = new JSONArray();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
@@ -162,7 +162,7 @@ public class SQLUtil {
 		int rowsCount = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
@@ -190,7 +190,7 @@ public class SQLUtil {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery("select password from sanaadmin where id=\"" + username + "\"");
@@ -217,7 +217,7 @@ public class SQLUtil {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://aa16lsfebxtbq3x.cwttjuc3j7hh.ap-south-1.rds.amazonaws.com:3306/sana", "root", "sanacards#2020#");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			smt.executeUpdate(criteria);

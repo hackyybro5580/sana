@@ -601,6 +601,7 @@ public class SanaAction {
 			String[] loginSession = getLoginSession().split("#");
 			String userName = loginSession.length == 3 ? loginSession[1] : request.getParameter("encrypted1");
 			String password = loginSession.length == 3 ? loginSession[2] : request.getParameter("encrypted2");
+			LOGGER.log(Level.INFO, "userName : "+userName +" password : "+password);
 			if (password != null && userName != null && !password.equals("") && !userName.equals("")) {
 				if (SQLUtil.isValidUser(userName, password)) {
 					response.setStatus(HttpServletResponse.SC_ACCEPTED);

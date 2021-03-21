@@ -22,8 +22,8 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			result = Boolean.TRUE;
 		} catch (Exception e1) {
@@ -31,8 +31,8 @@ public class SQLUtil {
 			String message = e1.getMessage();
 			if (message != null && message.startsWith("Unknown database")) {
 				try {
-//					con = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
+//					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
 					Statement smt = con.createStatement();
 					smt.executeUpdate("create database sana");
 				} catch (Exception e) {
@@ -54,8 +54,8 @@ public class SQLUtil {
 		Boolean result = Boolean.FALSE;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			// smt.executeUpdate("create table products(ID varchar(50) NOT NULL UNIQUE, NAME varchar(50), PRICE FLOAT, PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION
 			// varchar(15), DESCRIPTION text, COLOR varchar(25))");
@@ -109,8 +109,8 @@ public class SQLUtil {
 		JSONArray responseArray = new JSONArray();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			JSONObject obj = null;
@@ -171,8 +171,8 @@ public class SQLUtil {
 		int rowsCount = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			rs.next();
@@ -199,8 +199,8 @@ public class SQLUtil {
 		boolean result = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery("select password from sanaadmin where id=\"" + username + "\"");
 			rs.next();
@@ -226,8 +226,8 @@ public class SQLUtil {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			smt.executeUpdate(criteria);
 			return true;
@@ -251,8 +251,8 @@ public class SQLUtil {
 		JSONArray orders = new JSONArray();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			JSONObject obj = null;

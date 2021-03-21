@@ -68,6 +68,9 @@ a:hover, i:hover, button:hover{
 	<div style="text-align: center;">
 		<a href="/homepage"><img id="sanaCard" src="img/sanaLogo.jpg" style="width: 35%;" alt="SANA CARDS"></a>
 	</div>
+	<div style="text-align: right;">
+		Order Id/ Name / Phone Number : <input style="width:200px;" type="text" id="viewInvoice">
+	</div>
 </div>
 
 <div class="fullPage">
@@ -77,7 +80,7 @@ a:hover, i:hover, button:hover{
 			<th>Items</th>
 		</tr>
 		<tr>
-			<td style="vertical-align: baseline;">
+			<td>
 				<aside>
 				   <nav>
 				      <div>
@@ -89,6 +92,7 @@ a:hover, i:hover, button:hover{
 				                  <ul>
 									<li><a onclick="viewItems(this);" id="sliderContent" value="sliderContent">Slider Content</a></li>
 									<li><a onclick="viewItems(this);" id="blogs" value="blogs">Blogs</a></li>
+									<li><a onclick="viewItems(this);" id="instaFeed" value="instaFeed">Instagram Feed</a></li>
 				                  </ul>
 				               </div>
 				            </li>
@@ -178,6 +182,19 @@ function viewItems(currObj){
 			$('#products').html(data);		
 		});
 }
+function viewInvoice(currObj){
+$.post("/viewInvoice",{"id":currObj.value},
+	function(data, textStatus, jqXHR){
+		$('#products').html(data);		
+	});
+}
+var input = document.getElementById("viewInvoice");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+	  viewInvoice(this);
+  }
+});
+
 function deleteItem(id, currObj){
 	if (window.confirm('Remove item?')){
 		performOperation('delete',$('#currentSelector').val(), id, currObj);
@@ -249,6 +266,9 @@ function addSliderRow(){
 }
 function addBlogRow(){
 	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="date" type="text"></span></td><td><span><input selectorVal="likeURL" type="text"></span></td><td><span><input selectorVal="postURL" type="text"></span></td><td><span><input selectorVal="title1" type="text"></span></td><td><span><input selectorVal="title2" type="text"></span></td><td><span><input selectorVal="title3" type="text"></span></td></tr>');
+}
+function addInstaFeedRow(){
+	$('#productsTable tbody').append('<tr><td><span> <i onclick="addProduct(this);" class="fa fa-check"></i></span></td><td><span> <i onclick="deleteItem(undefined, this);" class="fa fa-times"></i></span></td><td><span><input selectorVal="path" type="text"></span></td><td><span><input selectorVal="postURL" type="text"></span></td></tr>');
 }
 function performOperation(type, subCategory,  param, currObj){
 	$.post("/CMS",{"type":type, "subCategory":subCategory, "inputData":param})

@@ -402,14 +402,14 @@ h3.ti7{
 							<tr>
 								<%for(int i=0;i<2;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
+									<a href="<%=obj.get("postURL")%>" target="_blank"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>
 							<tr>
 								<%for(int i=2;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
+									<a href="<%=obj.get("postURL")%>" target="_blank"><img src="<%=obj.get("path")%>" alt="" class="TwoInARow"></a>
 								</td>
 								<%}%>
 							</tr>

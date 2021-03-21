@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +23,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			result = Boolean.TRUE;
 		} catch (Exception e1) {
@@ -31,7 +32,7 @@ public class SQLUtil {
 			if (message != null && message.startsWith("Unknown database")) {
 				try {
 					con = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8", "root", "SanaDB#2020#Admin");
-					//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
+//					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
 					Statement smt = con.createStatement();
 					smt.executeUpdate("create database sana");
 				} catch (Exception e) {
@@ -54,7 +55,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			// smt.executeUpdate("create table products(ID varchar(50) NOT NULL UNIQUE, NAME varchar(50), PRICE FLOAT, PATH varchar(100), TYPE varchar(25), SUBCATEGORY varchar(30), ORIENTATION
 			// varchar(15), DESCRIPTION text, COLOR varchar(25))");
@@ -63,7 +64,11 @@ public class SQLUtil {
 			smt.executeUpdate("create table sliderContent(ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, PATH text, TITLE1 text, TITLE2 text)");
 
 			smt.executeUpdate("create table blogs(ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, DATE text,LIKE_URL text, POST_URL text, PATH text, TITLE1 text, TITLE2 text, TITLE3 text)");
-
+			
+			smt.executeUpdate("create table orders (id text, name text, email text, mobile varchar(15), date varchar(11), cart text)");
+			
+			smt.executeUpdate("create table instaFeed (ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, path text, postURL text)");
+			
 			// Insert into DB from propertyFile starts
 			// String insertquery = "insert into products values(";
 			// String[] productsArray = DefaultValues.productArray;
@@ -105,7 +110,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			JSONObject obj = null;
@@ -137,6 +142,10 @@ public class SQLUtil {
 					obj.put("path", rs.getString("path"));
 					obj.put("title1", rs.getString("title1"));
 					obj.put("title2", rs.getString("title2"));
+				} else if((type.equals("instaFeed"))) {
+					obj.put("id", rs.getString("id"));
+					obj.put("path", rs.getString("path"));
+					obj.put("postURL", rs.getString("postURL"));
 				}
 				responseArray.put(obj);
 			}
@@ -163,7 +172,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(criteria);
 			rs.next();
@@ -191,7 +200,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			ResultSet rs = smt.executeQuery("select password from sanaadmin where id=\"" + username + "\"");
 			rs.next();
@@ -218,7 +227,7 @@ public class SQLUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
 			Statement smt = con.createStatement();
 			smt.executeUpdate(criteria);
 			return true;
@@ -233,6 +242,43 @@ public class SQLUtil {
 			} catch (Exception e) {
 				LOGGER.log(Level.SEVERE, "Exception in executeCriteria finally method!", e);
 				return false;
+			}
+		}
+	}
+	
+	public static JSONArray getInvoice(String criteria) {
+		Connection con = null;
+		JSONArray orders = new JSONArray();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana", "root", "SanaDB#2020#Admin");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sana","root","");
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery(criteria);
+			JSONObject obj = null;
+			while (rs.next()) {
+				obj = new JSONObject();
+				obj.put("id", rs.getString("id"));				
+				obj.put("name", rs.getString("name"));
+				obj.put("email", rs.getString("email"));
+				obj.put("mobile", rs.getString("mobile"));
+				obj.put("date", rs.getString("date"));
+				obj.put("cart", rs.getString("cart"));
+				orders.put(obj);
+			}
+			rs.close();
+			return orders;
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Exception in executeCriteria method!", e);
+			return orders;
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (Exception e) {
+				LOGGER.log(Level.SEVERE, "Exception in executeCriteria finally method!", e);
+				return orders;
 			}
 		}
 	}

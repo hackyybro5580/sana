@@ -38,9 +38,9 @@
         	<result name="error">error</result>
         	<result name="mob_error">mob_error</result>
         </action>
-        <action name="contactus">
-        	<result type="tiles">ContactUs</result>
-        	<result type="tiles">mob_ContactUs</result>
+        <action name="contactus" class="org.sana.core.SanaAction" method="contactUs">
+        	<result name="success" type="tiles">ContactUs</result>
+        	<result name="mob_success" type="tiles">mob_ContactUs</result>
         	<result name="error">error</result>
         	<result name="mob_error">mob_error</result>
         </action>
@@ -64,7 +64,13 @@
         <action name="viewItems" class="org.sana.core.SanaAction" method="viewItems">
         	<result name="success">jsp/viewItems.jsp</result>
         	<result name="blogs">jsp/blogs.jsp</result>
+        	<result name="instaFeed">jsp/instaFeed.jsp</result>
         	<result name="sliderContent">jsp/sliderContent.jsp</result>
+        	<result name="error">jsp/admin.jsp</result>
+        	<result name="login">jsp/admin.jsp</result>
+        </action>
+        <action name="viewInvoice" class="org.sana.core.SanaAction" method="viewInvoice">
+        	<result name="success">jsp/viewInvoice.jsp</result>
         	<result name="error">jsp/admin.jsp</result>
         	<result name="login">jsp/admin.jsp</result>
         </action>

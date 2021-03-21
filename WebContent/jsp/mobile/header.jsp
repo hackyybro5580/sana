@@ -323,8 +323,8 @@ article {
                <div class="sidebar-submenu">
                   <ul>
 					<li><a href="/aboutus">About Us</a></li>
-                    <li><a href="/contactus">Contact Us</a></li>
-                    <li><a href="shop.html">Our Blog</a></li> 
+                    <li style="display:none"><a href="/contactus">Contact Us</a></li>
+                    <li style="display:none"><a href="shop.html">Our Blog</a></li> 
                   </ul>
                </div>
             </li>

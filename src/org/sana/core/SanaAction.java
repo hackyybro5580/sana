@@ -1,6 +1,8 @@
 package org.sana.core;
 
 import java.io.PrintWriter;
+import java.net.URL;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +39,7 @@ public class SanaAction {
 				requestObj = new JSONObject();
 				requestObj.put("sliderContent", fetchShowCaseItems("sliderContent", 4));
 				requestObj.put("blogs", fetchShowCaseItems("blogs", 2));
-				requestObj.put("instaFeed", limitShowCaseItems(PropertyUtil.getValue("instaFeed")));
+				requestObj.put("instaFeed", fetchShowCaseItems("instaFeed", 8));
 				requestObj.put("showCaseHindu", fetchShowCaseItems("hinduInvitation", 6));
 				requestObj.put("showCaseMuslim", fetchShowCaseItems("muslimInvitation", 6));
 				requestObj.put("showCaseChristian", fetchShowCaseItems("christianInvitation", 6));
@@ -112,10 +115,8 @@ public class SanaAction {
 			if (productId == null) {
 				return "error";
 			}
-			if (count == null) {
-				count = "1";
-			} else if (Integer.parseInt(count) < 0) {
-				count = "1";
+			if (count == null || (count!=null && Integer.parseInt(count) < 0)) {
+				count = "100";
 			}
 
 			JSONArray cart = new JSONArray();
@@ -531,7 +532,10 @@ public class SanaAction {
 				criteria = "select * from blogs limit " + limit;
 			} else if (subCategory.equals("sliderContent")) {
 				criteria = "select * from sliderContent limit " + limit;
-			} else {
+			} else if(subCategory.equals("instaFeed")) {
+				criteria = "select * from instaFeed limit " + limit;
+			}
+			else {
 				subCategory = null;
 			}
 			showCaseLimiter = SQLUtil.getProductsWithCriteria(criteria, subCategory);
@@ -677,7 +681,21 @@ public class SanaAction {
 						String criteria = "delete from blogs where id=" + request.getParameter("inputData");
 						SQLUtil.executeCriteria(criteria);
 					}
-				} else {
+				} else if (subCategory != null && subCategory.equals("instaFeed")) {
+					if (operation.equals("update")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "update instaFeed set path=\"" + inputData.get("path") + "\"," + "postURL=\"" + inputData.get("postURL") + "\" where ID=" + inputData.get("id");
+						SQLUtil.executeCriteria(criteria);
+					} else if (operation.equals("create")) {
+						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
+						String criteria = "insert into instaFeed(path, postURL) values(\"" + inputData.get("path") + "\",\"" + inputData.get("postURL") + "\")";
+						SQLUtil.executeCriteria(criteria);
+					} else if (operation.equals("delete")) {
+						String criteria = "delete from instaFeed where id=" + request.getParameter("inputData");
+						SQLUtil.executeCriteria(criteria);
+					}
+				}
+				else {
 					if (operation.equals("update")) {
 						JSONObject inputData = new JSONObject(request.getParameter("inputData"));
 						String criteria = "update products set path=\"" + inputData.get("path") + "\"," + "name=\"" + inputData.get("name") + "\"," + "price=" + inputData.get("price") + "," + "type=\"" + inputData.get("type") + "\"," + "orientation=\"" + inputData.get("orientation") + "\"," + "color=\"" + inputData.get("color") + "\"," + "description=\"" + inputData.get("description") + "\"," + "images=\"" + inputData.get("images") + "\"," + "IS_SHOW_CASE_ITEM=" + inputData.get("isShowCaseItem") + " where id=\"" + inputData.get("id") + "\"";
@@ -722,6 +740,7 @@ public class SanaAction {
 			case "friendsInvitation":
 			case "sliderContent":
 			case "blogs":
+			case "instaFeed":
 				break;
 			default:
 				subcategory = "";
@@ -733,7 +752,11 @@ public class SanaAction {
 			} else if (subcategory.equals("blogs")) {
 				criteria = "select * from blogs";
 				result = "blogs";
-			} else {
+			} else if(subcategory.equals("instaFeed")) {
+				criteria = "select * from instaFeed";
+				result = "instaFeed";
+			}
+			else {
 				subcategory = null;
 			}
 			JSONArray products = SQLUtil.getProductsWithCriteria(criteria, subcategory);
@@ -745,6 +768,64 @@ public class SanaAction {
 		}
 	}
 
+	public String viewInvoice() {
+		JSONArray response = new JSONArray();
+		if (!isUserLoggedIn()) {
+			return "login";
+		}
+		try {
+			String result = "success";
+			String id = request.getParameter("id");
+			if(id == null) {
+				return "success";
+			}
+			
+			String criteria = "select * from orders where name like '%"+id+"%' or id like '%"+id+"%' or email like '%"+id+"%' or mobile like '%"+id+"%' order by id desc limit 20";
+			
+			String serverName = request.getScheme() + "://" + request.getServerName() + (request.getServerPort() != 0 ? ":" + request.getServerPort() : "") + "/template/MailTemplate.html";
+			URL url = new URL(serverName);
+			String mailTempl = IOUtils.toString(url.openStream());
+			
+			JSONArray orders = SQLUtil.getInvoice(criteria);
+			for(int orderIndex=0;orderIndex<orders.length();orderIndex++) {
+				JSONObject orderObj = orders.getJSONObject(orderIndex);
+				
+				JSONArray cart = new JSONArray(orderObj.get("cart").toString());
+				String orderId = orderObj.getString("id");
+				String name = orderObj.getString("name");
+				String mobile = orderObj.getString("mobile");
+				String email = orderObj.getString("email");
+				String purchaseDate = orderObj.getString("date");
+				
+				String replaceContent = "<tbody>";
+				float total = 0;
+				for (int i = 0; i < cart.length(); i++) {
+					JSONObject obj = cart.getJSONObject(i);
+					total += Float.parseFloat(obj.get("totalPrice") + "");
+					replaceContent += "<tr><td>" + (i + 1) + "</td><td>" + obj.get("id") + "</td><td>" + obj.get("name") + "</td><td>" + obj.get("count") + "</td><td>" + "Rs. " + obj.get("totalPrice") + "</td></tr>";
+				}
+				replaceContent += "</tbody>";
+				
+				String mailTemplate = mailTempl;
+				mailTemplate = mailTemplate.replace("#TBODY", replaceContent);
+				mailTemplate = mailTemplate.replace("#SUBTOTAL", (Math.round(total * 100.0) / 100.0) + "");
+				mailTemplate = mailTemplate.replace("#GRANDTOTAL", (Math.round(total * 100.0) / 100.0) + "");
+				mailTemplate = mailTemplate.replace("#NAME", name);
+				mailTemplate = mailTemplate.replace("#EMAIL", email);
+				mailTemplate = mailTemplate.replace("#MOBILE", mobile);
+				mailTemplate = mailTemplate.replace("#ORDERID", orderId);
+				mailTemplate = mailTemplate.replace("#DATEOFPURCHASE", purchaseDate);
+				
+				response.put(mailTemplate);
+			}
+			request.setAttribute("invoice", response);
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Exception in viewItems method!", e);
+			return "success";
+		}
+	}
+	
 	public void initDB() {
 		PrintWriter pw = null;
 		try {
@@ -773,6 +854,13 @@ public class SanaAction {
 	}
 
 	public String aboutUS() {
+		execute();
+		String result = "success";
+		result = isMobile() ? "mob_" + result : result;
+		return result;
+	}
+	
+	public String contactUs() {
 		execute();
 		String result = "success";
 		result = isMobile() ? "mob_" + result : result;

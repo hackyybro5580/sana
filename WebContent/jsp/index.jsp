@@ -348,7 +348,7 @@ td div{
 							<tr>
 								<%for(int i=0;i<4;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
+									<a href="<%=obj.get("postURL")%>" target="_blank"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
 <!-- 									<div class="bottom50 showOnHover"> -->
 <%-- 										<div><%=obj.get("name")%></div> --%>
 <%-- 										<div>Rs. <%=obj.get("price")%></div> --%>
@@ -359,7 +359,7 @@ td div{
 							<tr>
 								<%for(int i=4;i<8;i++){JSONObject obj = instaFeed.getJSONObject(i);%>
 								<td class="showCaseItems">
-									<a onclick="openProductDetails('<%=obj.get("id")%>');"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
+									<a href="<%=obj.get("postURL")%>" target="_blank"><img src="<%=obj.get("path")%>" alt="" class="FourInARow"></a>
 <!-- 									<div class="bottom50 showOnHover"> -->
 <%-- 										<div><%=obj.get("name")%></div> --%>
 <%-- 										<div>Rs. <%=obj.get("price")%></div> --%>

@@ -252,9 +252,8 @@ article {
             </li>
             <li style="text-align: center;">
             	<ul class="social-icon" style="padding-bottom: 80px;">
-                     <li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-                     <li style="padding:0 20px 0px 20px;"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-                     <li><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+                     <li><a href="https://www.facebook.com/sana.cards/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                     <li><a href="https://www.instagram.com/sanacards2020/" target="_blank"	><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </li>
             <li class="sidebar-dropdown">

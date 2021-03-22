@@ -244,10 +244,8 @@ JSONArray images = (JSONArray)request.getAttribute("images");
         <div class="share">
            <h5 class="share">share this on :</h5>
            <ul>
-               <li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-               <li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-               <li><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
-               <li><a href="www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+               <li><a href="https://www.facebook.com/sana.cards/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+               <li><a href="https://www.instagram.com/sanacards2020/" target="_blank"><i class="fa fa-instagram"></i></a></li>
            </ul>
         </div>
     </div>

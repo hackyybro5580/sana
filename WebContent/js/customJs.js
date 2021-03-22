@@ -293,6 +293,7 @@ function openShopPage(currObj){
 //	});
 	
 	currObj = $(currObj);
+	document.cookie = "subCategory="+currObj.attr('value').split('#')[1];
 	var postURL = "/shop#"+currObj.attr('value');
 	$('html').loadingView({'state':true});
 	window.location.href = postURL;

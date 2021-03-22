@@ -321,10 +321,15 @@ public class SanaAction {
 			String[] filters = critFromReq != null ? critFromReq.split("#") : new String[] {};
 
 			String limit = "12";
-
+			String cookieVal = getValueFromCookie("subCategory");
+			
 			if (filters.length < 8) {
 				criteria = "select * from products limit 12";
 				totalProductsCrit = "select count(*) from products";
+				if(critFromReq==null && cookieVal!=null) {
+					criteria = "select * from products where subcategory='"+cookieVal+"' limit 12";
+					totalProductsCrit = "select count(*) from products where subcategory='"+cookieVal+"'";
+				}
 			} else {
 				String category = filters[0];
 				String type = filters[1];
@@ -356,7 +361,9 @@ public class SanaAction {
 					category = null;
 				}
 
-				if (category != null) {
+				if(category == null && cookieVal!=null) {
+					query = "where subcategory='" + cookieVal + "'";
+				} else if (category != null) {
 					query = "where subcategory='" + category + "'";
 				} else {
 					query = "where subcategory!='null'";
@@ -865,5 +872,21 @@ public class SanaAction {
 		String result = "success";
 		result = isMobile() ? "mob_" + result : result;
 		return result;
+	}
+	
+	public String getValueFromCookie(String key) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(key)) {
+					try {
+						return cookie.getValue();
+					} catch (Exception e) {
+
+					}
+				}
+			}
+		}
+		return null;
 	}
 }
